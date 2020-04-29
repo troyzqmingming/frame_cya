@@ -5,8 +5,9 @@ ext {
             "okhttp-logging:4.0.0": "com.squareup.okhttp3:logging-interceptor:4.0.0",
             //utils
             "liveBus:1.5.7"       : "com.jeremyliao:live-event-bus-x:1.5.7",
-            "Logger"              : 'com.orhanobut:logger:2.2.0'
-
+            "Logger"              : 'com.orhanobut:logger:2.2.0',
+            //BaseQuickAdapter
+            'BaseRecyclerViewAdapterHelper' : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46',
 
     ]
 }

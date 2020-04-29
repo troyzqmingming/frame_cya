@@ -5,12 +5,9 @@ import androidx.viewbinding.ViewBinding
 import com.cya.frame.retrofit.BaseResult
 
 abstract class BaseViewModel<V : ViewBinding, R : BaseRepository>(
-    val binding: V,
     val repository: R
 ) :
     ViewModel() {
-
-    val mContext = binding.root.context
 
     /**
      * 检测结果
