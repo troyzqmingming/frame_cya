@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/personalFragment">
+
+
+    <fragment
+        android:id="@+id/homeListFragment"
+        android:name="com.cya.frame.demo.home.HomeListFragment"
+        android:label="HomeListFragment"
+        tools:layout="@layout/fragment_home_list" />
+    <fragment
+        android:id="@+id/personalFragment"
+        android:name="com.cya.frame.demo.personal.PersonalFragment"
+        android:label="PersonalFragment"
+        tools:layout="@layout/fragment_personal">
+        <action
+            android:id="@+id/action_personalFragment_to_loginActivity"
+            app:destination="@id/loginActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.cya.frame.demo.login.LoginActivity"
+        android:label="LoginActivity"
+        tools:layout="@layout/activity_login" />
+</navigation>
