@@ -66,6 +66,8 @@ dependencies {
 
 //推荐放在module的gradle依赖文件的最后面
 publish {
+    //不指明，默认是上传到maven,指明的话这里的名字需要和你创建的仓库的名字一样
+//    repoName = 'maven'
     //userOrg这个是用户的组织，我们创建的是个人帐号，也就是我们的用户名（后续会介绍，必须一致，改成你自己的bintrayName）
     userOrg = 'cyazqming'
     //我们的组id 类比'com.github.bumptech.glide:glide:3.7.0' 中的 com.github.bumptech.glide 这一部分

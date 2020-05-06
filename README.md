@@ -1,3 +1,9 @@
+#使用方法
+在build.gradle中添加
+`implementation 'com.lib:cya_frame:1.0.0'`
+
+
+
 #概述
 
 view:ViewBinding
