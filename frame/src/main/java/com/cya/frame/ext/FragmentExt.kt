@@ -7,11 +7,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.cya.frame.view.ToastView
 
-fun Fragment.toast(msg: String, duration: Int = Toast.LENGTH_SHORT) {
-    activity?.let {
-        ToastView.show(it, msg, duration)
-    }
-}
 
 fun <A : Activity> Fragment.startActivity(
     mClass: Class<A>,

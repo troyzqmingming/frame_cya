@@ -3,12 +3,10 @@ package com.cya.frame.ext
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
-import com.cya.frame.view.ToastView
-
-fun Activity.toast(msg: String, duration: Int = Toast.LENGTH_SHORT) {
-    ToastView.show(this, msg, duration)
-}
+import android.view.View
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 
 
 fun <A : Activity>
@@ -25,4 +23,19 @@ fun <A : Activity>
         intent.putExtras(it)
     }
     this.startActivity(intent)
+}
+
+fun Activity.hideKeyboard() {
+    inputMethodManager?.hideSoftInputFromWindow((currentFocus ?: View(this)).windowToken, 0)
+    window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+    currentFocus?.clearFocus()
+}
+
+fun Activity.showKeyboard(et: EditText) {
+    et.requestFocus()
+    inputMethodManager?.showSoftInput(et, InputMethodManager.SHOW_IMPLICIT)
+}
+
+fun Activity.hideKeyboard(view: View) {
+    inputMethodManager?.hideSoftInputFromWindow(view.windowToken, 0)
 }
