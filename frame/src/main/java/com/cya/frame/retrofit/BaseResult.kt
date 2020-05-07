@@ -1,6 +1,6 @@
 package com.cya.frame.retrofit
 
-import java.lang.Exception
+import com.cya.frame.exception.CyaException
 
 /**
  * 用于接口数据返回
@@ -16,7 +16,10 @@ sealed class BaseResult<out T : Any> {
      * @param exception 异常
      * @param errorMsg 自定义错误msg
      */
-    data class Failed(val exception: Exception?, val errorMsg: String) : BaseResult<Nothing>()
+    data class Failed(
+        val exception: CyaException?,
+        val errorMsg: String
+    ) : BaseResult<Nothing>()
 
     override fun toString(): String {
         return when (this) {
