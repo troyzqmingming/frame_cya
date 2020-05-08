@@ -22,19 +22,19 @@ class LoginViewModel(repository: LoginRepository) :
             emitUIState(
                 hideProgress = true
             )
+            //retrofit2自动切换线程
+//            val response = withContext(Dispatchers.IO) {
+//                repository.loginWanAndroid(username, password)
+//            }
             val response = repository.loginWanAndroid(username, password)
             checkResult(response, {
-                val userInfo = it?.nickname?.let { it1 ->
-                    UserResult(it1)
-
-                }
                 emitUIState(
                     hideProgress = true,
-                    userInfo = userInfo
+                    userInfo = it
                 )
                 //通知登陆成功
                 LiveEventBus.get(Contract.EventKey.User.UPDATE_INFO, UserResult::class.java)
-                    .post(userInfo)
+                    .post(it)
             }, { i, j ->
                 emitUIState(
                     hideProgress = true,

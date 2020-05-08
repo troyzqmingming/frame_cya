@@ -10,7 +10,9 @@ import kotlinx.coroutines.launch
 class HomeListViewModel(repository: HomeListRepository) :
     DemoBaseViewModel<FragmentHomeListBinding, HomeListRepository>(repository) {
 
-    var uiState = MutableLiveData<UIState>()
+    private var _uiState = MutableLiveData<UIState>()
+    val uiState: MutableLiveData<UIState>
+        get() = _uiState
 
     var curPageId = 0
 
@@ -27,9 +29,6 @@ class HomeListViewModel(repository: HomeListRepository) :
                 }
             )
             checkResult(result, {
-                it?.let {
-                    repository.articleData = it
-                }
                 emitUIState(it?.list, true, curPageId == 0, curPageId > 0)
             }, { i, j ->
                 emitUIState(
@@ -48,7 +47,7 @@ class HomeListViewModel(repository: HomeListRepository) :
         isLoadMoreArticle: Boolean = false,
         errorMsg: String? = null
     ) {
-        uiState.value =
+        _uiState.value =
             UIState(articleList, isGetDataSuccess, isRefreshArticle, isLoadMoreArticle, errorMsg)
     }
 

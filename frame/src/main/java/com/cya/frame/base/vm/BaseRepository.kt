@@ -19,7 +19,8 @@ open class BaseRepository {
         return try {
             call()
         } catch (e: Exception) {
-            "${e.message}\n$errorMsg".logE()
+            ("Exception msg:\t${e.message}\n" +
+                    "errorMsg:\t$errorMsg").logE()
             with(ExceptionEngine.handleException(e)) {
                 BaseResult.Failed(this, errorMsg)
             }
