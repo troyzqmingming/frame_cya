@@ -1,11 +1,9 @@
 package com.cya.frame.demo.home.vm
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.cya.frame.demo.base.vm.DemoBaseViewModel
 import com.cya.frame.demo.bean.result.Article
 import com.cya.frame.demo.databinding.FragmentHomeListBinding
-import kotlinx.coroutines.launch
 
 class HomeListViewModel(repository: HomeListRepository) :
     DemoBaseViewModel<FragmentHomeListBinding, HomeListRepository>(repository) {
@@ -19,8 +17,8 @@ class HomeListViewModel(repository: HomeListRepository) :
     fun loadArticle(isRefresh: Boolean = true) = getArticleList(isRefresh)
 
     private fun getArticleList(isRefresh: Boolean) {
-        viewModelScope.launch {
-            val result = repository.getArticleList(
+        launchResult({
+            repository.getArticleList(
                 if (isRefresh) {
                     curPageId = 0
                     curPageId
@@ -28,16 +26,15 @@ class HomeListViewModel(repository: HomeListRepository) :
                     ++curPageId
                 }
             )
-            checkResult(result, {
-                emitUIState(it?.list, true, curPageId == 0, curPageId > 0)
-            }, { i, j ->
-                emitUIState(
-                    isRefreshArticle = curPageId == 0,
-                    isLoadMoreArticle = curPageId > 0,
-                    errorMsg = j
-                )
-            })
-        }
+        }, {
+            emitUIState(it?.list, true, curPageId == 0, curPageId > 0)
+        }, {
+            emitUIState(
+                isRefreshArticle = curPageId == 0,
+                isLoadMoreArticle = curPageId > 0,
+                errorMsg = it
+            )
+        })
     }
 
     private fun emitUIState(

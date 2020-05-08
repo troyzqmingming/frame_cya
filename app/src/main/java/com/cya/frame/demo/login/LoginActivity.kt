@@ -35,7 +35,6 @@ class LoginActivity : BaseMVVMActivity<ActivityLoginBinding, LoginViewModel>() {
                     finish()
                 }
                 it.errorMsg?.let { error ->
-                    println("error:$error")
                     toast(error)
                 }
             })

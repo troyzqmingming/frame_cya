@@ -23,11 +23,11 @@ class LoginRepository : DemoBaseRepository() {
     }
 
     suspend fun loginWanAndroid(username: String, password: String): BaseResult<UserResult> {
-        return safeCall({ requestLoginWanAndroid(username, password) })
+        return safeCall { requestLoginWanAndroid(username, password) }
     }
 
     suspend fun registerWanAndroid(username: String, password: String): BaseResult<UserResult> {
-        return safeCall({ requestRegisterWanAndroid(username, password) })
+        return safeCall { requestRegisterWanAndroid(username, password) }
     }
 
     private suspend fun requestRegisterWanAndroid(

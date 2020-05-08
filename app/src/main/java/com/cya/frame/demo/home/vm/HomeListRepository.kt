@@ -10,7 +10,7 @@ import com.cya.frame.retrofit.BaseResult
 class HomeListRepository : DemoBaseRepository() {
 
     suspend fun getArticleList(pageId: Int): BaseResult<ArticleResult> {
-        return safeCall(call = { requestArticleList(pageId) }, errorMsg = "获取列表失败")
+        return safeCall { requestArticleList(pageId) }
     }
 
     private suspend fun requestArticleList(pageId: Int) =

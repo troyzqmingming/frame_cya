@@ -18,34 +18,32 @@ class LoginViewModel(repository: LoginRepository) :
         get() = _uiState
 
     fun loginWanAndroid(username: String, password: String) {
-        viewModelScope.launch {
+        launchResult({
             emitUIState(
-                hideProgress = true
+                showProgress = true
             )
-            //retrofit2自动切换线程
-//            val response = withContext(Dispatchers.IO) {
-//                repository.loginWanAndroid(username, password)
-//            }
-            val response = repository.loginWanAndroid(username, password)
-            checkResult(response, {
-                emitUIState(
-                    hideProgress = true,
-                    userInfo = it
-                )
-                //通知登陆成功
-                LiveEventBus.get(Contract.EventKey.User.UPDATE_INFO, UserResult::class.java)
-                    .post(it)
-            }, { i, j ->
-                emitUIState(
-                    hideProgress = true,
-                    errorMsg = j
-                )
-            })
-        }
+            repository.loginWanAndroid(username, password)
+        }, {
+            emitUIState(
+                hideProgress = true,
+                userInfo = it
+            )
+            //通知登陆成功
+            LiveEventBus.get(Contract.EventKey.User.UPDATE_INFO, UserResult::class.java)
+                .post(it)
+        }, {
+            emitUIState(
+                hideProgress = true,
+                errorMsg = it
+            )
+        })
     }
 
     fun registerWanAndroid(username: String, password: String) {
         viewModelScope.launch {
+            emitUIState(
+                showProgress = true
+            )
             val response = repository.registerWanAndroid(username, password)
             checkResult(response, {
                 val userInfo = it?.nickname?.let { it1 -> UserResult(it1) }
@@ -56,10 +54,15 @@ class LoginViewModel(repository: LoginRepository) :
                 //通知登陆成功
                 LiveEventBus.get(Contract.EventKey.User.UPDATE_INFO, UserResult::class.java)
                     .post(userInfo)
-            }, { i, j ->
+            }, {
                 emitUIState(
                     hideProgress = true,
-                    errorMsg = j
+                    errorMsg = it
+                )
+            }, {
+                emitUIState(
+                    hideProgress = true,
+                    errorMsg = it.throwable?.message
                 )
             })
         }
