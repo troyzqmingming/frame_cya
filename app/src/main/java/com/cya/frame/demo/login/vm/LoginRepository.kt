@@ -17,57 +17,45 @@ class LoginRepository : DemoBaseRepository() {
 
     var userInfoData: String by Preference(Contract.PreferenceKey.USER_INFO, "")
 
+    fun logoutWanAndroid(action: (() -> Unit)? = null) {
+        isLogin = false
+        userInfoData = ""
+        action?.invoke()
+    }
+
     suspend fun loginWanAndroid(username: String, password: String): BaseResult<LoginResult> {
         return safeCall({
-            requestLoginWanAndroid(username, password)
-        }, {
-            it
+            val loginResult = requestLoginWanAndroid(username, password)
+            if (loginResult is BaseResult.Success) {
+                val userInfo = loginResult.data?.nickname?.let { it1 ->
+                    UserResult(it1)
+                }
+                isLogin = true
+                userInfoData = Gson().toJson(userInfo)
+            }
+
+            loginResult
         })
     }
+
     suspend fun registerWanAndroid(username: String, password: String): BaseResult<LoginResult> {
-        return safeCall({
-            requestRegisterWanAndroid(username, password)
-        }, {
-            it
-        })
+        return safeCall({ requestRegisterWanAndroid(username, password) })
     }
 
     suspend fun login(phone: String, code: String): BaseResult<LoginResult> {
-        return safeCall(
-            {
-                requestLogin(phone, code)
-            }, {
-                it
-            }, "登陆失败,请稍后重试"
-        )
-
-
+        return safeCall({ requestLogin(phone, code) })
     }
 
-    suspend fun loginAndGetUserInfo(phone: String, code: String): BaseResult<UserResult> {
-        return safeCall(
-            {
-                when (val result = requestLogin(phone, code)) {
-                    //登陆成功
-                    is BaseResult.Success -> {
-                        val userResult = requestGetUserInfo(result.data?.token)
-                        //保存用户信息
-                        if (userResult is BaseResult.Success) {
-                            isLogin = true
-                            userInfoData = Gson().toJson(userResult.data)
-                        }
-                        userResult
-                    }
-                    //登陆失败
-                    is BaseResult.Failed -> {
-                        BaseResult.Failed(result.exception, result.errorMsg)
-                    }
-                }
-            }, {
-                //todo 处理异常
-                it
+    suspend fun getUserInfo(token: String): BaseResult<UserResult> {
+        return safeCall({
+            val userResult = requestGetUserInfo(token)
+            //保存用户信息
+            if (userResult is BaseResult.Success) {
+                isLogin = true
+                userInfoData = Gson().toJson(userResult.data)
             }
-        )
+            userResult
+        })
     }
 
     private suspend fun requestLogin(phone: String, code: String): BaseResult<LoginResult> {
@@ -83,7 +71,7 @@ class LoginRepository : DemoBaseRepository() {
         return convertResponse(response)
     }
 
-    private suspend fun requestGetUserInfo(token: String?): BaseResult<UserResult> {
+    private suspend fun requestGetUserInfo(token: String): BaseResult<UserResult> {
         val mutableMap = mutableMapOf<String, Any?>()
         mutableMap["token"] = token
         mutableMap["sourcekey"] = "257ef09a04c62a0fab39ea89267cf525"

@@ -61,10 +61,10 @@ class HomeListFragment : BaseMVVMFragment<FragmentHomeListBinding, HomeListViewM
         }
         binding.refreshLayout.run {
             setOnRefreshListener {
-                vm.refreshArticle()
+                vm.loadArticle()
             }
             setOnLoadMoreListener {
-                vm.loadMoreArticle()
+                vm.loadArticle(false)
             }
         }
         runWithPermissions(Permission.CAMERA, Permission.WRITE_EXTERNAL_STORAGE) {

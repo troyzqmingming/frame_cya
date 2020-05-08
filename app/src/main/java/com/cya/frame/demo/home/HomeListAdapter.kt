@@ -1,14 +1,13 @@
 package com.cya.frame.demo.home
 
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseViewHolder
 import com.cya.frame.base.adapter.BaseRecyclerAdapter
 import com.cya.frame.demo.R
 import com.cya.frame.demo.bean.result.Article
 
 class HomeListAdapter : BaseRecyclerAdapter<Article>(R.layout.adapter_home_list) {
-    override fun getLayoutManager(): RecyclerView.LayoutManager {
+    override fun getLayoutManager(): LinearLayoutManager {
         return LinearLayoutManager(mContext)
     }
 

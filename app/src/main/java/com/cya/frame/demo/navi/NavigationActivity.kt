@@ -1,12 +1,12 @@
 package com.cya.frame.demo.navi
 
 import androidx.fragment.app.Fragment
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.cya.frame.base.ui.BaseActivity
 import com.cya.frame.demo.R
 import com.cya.frame.demo.databinding.ActivityNaviBinding
 import com.cya.frame.demo.home.HomeListFragment
 import com.cya.frame.demo.personal.PersonalFragment
+import com.cya.frame.ext.listener.setDefaultAdapter
 
 class NavigationActivity : BaseActivity<ActivityNaviBinding>() {
 
@@ -33,14 +33,11 @@ class NavigationActivity : BaseActivity<ActivityNaviBinding>() {
     override fun initView() {
         binding.viewpager.run {
             offscreenPageLimit = fragmentList.size
-            isUserInputEnabled = false
-            adapter = object : FragmentStateAdapter(this@NavigationActivity) {
-                override fun getItemCount(): Int {
-                    return fragmentList.size
-                }
-
-                override fun createFragment(position: Int): Fragment {
-                    return fragmentList[position]
+            isUserInputEnabled = true
+            setDefaultAdapter(this@NavigationActivity, fragmentList) {
+                when (it) {
+                    0 -> binding.navigationView.selectedItemId = R.id.homeListFragment
+                    1 -> binding.navigationView.selectedItemId = R.id.personalFragment
                 }
             }
         }

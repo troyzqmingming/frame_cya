@@ -12,17 +12,15 @@ class HomeListRepository : DemoBaseRepository() {
     lateinit var articleData: ArticleResult
 
     suspend fun getArticleList(pageId: Int): BaseResult<ArticleResult> {
-        return safeCall({
-            requestArticleList(pageId)
-        }, {
-            it
-        }, "获取失败，请稍后重试")
+        return safeCall(call = { requestArticleList(pageId) }, errorMsg = "获取列表失败")
     }
 
 
     private suspend fun requestArticleList(pageId: Int) =
         convertResponse(
-            RetrofitClient().getService(HomeService.Article::class.java, BaseUrl.URL_WAN_ANDROID)
-                .getArticleList(pageId)
+            RetrofitClient().getService(
+                HomeService.Article::class.java,
+                BaseUrl.URL_WAN_ANDROID
+            ).getArticleList(pageId)
         )
 }

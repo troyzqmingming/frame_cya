@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import com.cya.frame.base.ui.BaseMVVMActivity
 import com.cya.frame.demo.databinding.ActivityLoginBinding
 import com.cya.frame.demo.login.vm.LoginViewModel
+import com.cya.frame.ext.toast
 import org.koin.android.viewmodel.ext.android.getViewModel
 
 class LoginActivity : BaseMVVMActivity<ActivityLoginBinding, LoginViewModel>() {
@@ -35,7 +36,7 @@ class LoginActivity : BaseMVVMActivity<ActivityLoginBinding, LoginViewModel>() {
                 }
                 it.errorMsg?.let { error ->
                     println("error:$error")
-                    Toast.makeText(this@LoginActivity, error, Toast.LENGTH_SHORT).show()
+                    toast(error)
                 }
             })
         }

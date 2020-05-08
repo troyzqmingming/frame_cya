@@ -2,33 +2,39 @@ package com.cya.frame.demo.home.vm
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.cya.frame.base.vm.BaseViewModel
+import com.cya.frame.demo.base.vm.DemoBaseViewModel
 import com.cya.frame.demo.bean.result.Article
 import com.cya.frame.demo.databinding.FragmentHomeListBinding
 import kotlinx.coroutines.launch
 
 class HomeListViewModel(repository: HomeListRepository) :
-    BaseViewModel<FragmentHomeListBinding, HomeListRepository>(repository) {
+    DemoBaseViewModel<FragmentHomeListBinding, HomeListRepository>(repository) {
 
     var uiState = MutableLiveData<UIState>()
 
     var curPageId = 0
 
-    fun refreshArticle() = getArticleList(0)
-    fun loadMoreArticle() = getArticleList(++curPageId)
+    fun loadArticle(isRefresh: Boolean = true) = getArticleList(isRefresh)
 
-    private fun getArticleList(pageId: Int) {
+    private fun getArticleList(isRefresh: Boolean) {
         viewModelScope.launch {
-            val result = repository.getArticleList(pageId)
-            this@HomeListViewModel.checkResult(result, {
+            val result = repository.getArticleList(
+                if (isRefresh) {
+                    curPageId = 0
+                    curPageId
+                } else {
+                    ++curPageId
+                }
+            )
+            checkResult(result, {
                 it?.let {
                     repository.articleData = it
                 }
-                emitUIState(it?.list, true, pageId == 0, pageId > 0)
+                emitUIState(it?.list, true, curPageId == 0, curPageId > 0)
             }, { i, j ->
                 emitUIState(
-                    isRefreshArticle = pageId == 0,
-                    isLoadMoreArticle = pageId > 0,
+                    isRefreshArticle = curPageId == 0,
+                    isLoadMoreArticle = curPageId > 0,
                     errorMsg = j
                 )
             })

@@ -15,6 +15,8 @@ object Contract {
         object User {
 
             const val UPDATE_INFO = "update_info"
+
+            const val LOGOUT = "logout"
         }
     }
 }

@@ -2,46 +2,20 @@ package com.cya.frame.demo.login.vm
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.cya.frame.base.vm.BaseViewModel
+import com.cya.frame.demo.base.vm.DemoBaseViewModel
 import com.cya.frame.demo.bean.result.UserResult
 import com.cya.frame.demo.data.Contract
 import com.cya.frame.demo.databinding.ActivityLoginBinding
-import com.google.gson.Gson
 import com.jeremyliao.liveeventbus.LiveEventBus
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 class LoginViewModel(repository: LoginRepository) :
-    BaseViewModel<ActivityLoginBinding, LoginRepository>(repository) {
+    DemoBaseViewModel<ActivityLoginBinding, LoginRepository>(repository) {
 
-    val mUiState = MutableLiveData<UIState>()
+    private val _uiState = MutableLiveData<UIState>()
 
-
-    fun login(phone: String, code: String) {
-        viewModelScope.launch {
-            val response =
-                repository.loginAndGetUserInfo(
-                    phone,
-                    code
-                )
-            checkResult(response, {
-                //update ui
-                emitUIState(
-                    hideProgress = true,
-                    userInfo = it
-                )
-                //通知登陆成功
-                LiveEventBus.get(Contract.EventKey.User.UPDATE_INFO, UserResult::class.java)
-                    .post(it)
-            }, { i, j ->
-                //update ui
-                emitUIState(
-                    hideProgress = true,
-                    errorMsg = j
-                )
-            })
-        }
-    }
+    val mUiState
+        get() = _uiState
 
     fun loginWanAndroid(username: String, password: String) {
         viewModelScope.launch {
@@ -54,8 +28,6 @@ class LoginViewModel(repository: LoginRepository) :
                     UserResult(it1)
 
                 }
-                repository.isLogin = true
-                repository.userInfoData = Gson().toJson(userInfo)
                 emitUIState(
                     hideProgress = true,
                     userInfo = userInfo
@@ -100,7 +72,7 @@ class LoginViewModel(repository: LoginRepository) :
         userInfo: UserResult? = null,
         errorMsg: String? = null
     ) {
-        mUiState.value = UIState(showProgress, hideProgress, userInfo, errorMsg)
+        _uiState.value = UIState(showProgress, hideProgress, userInfo, errorMsg)
     }
 
     data class UIState(

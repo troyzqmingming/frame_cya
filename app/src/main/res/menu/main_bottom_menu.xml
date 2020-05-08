@@ -2,9 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:icon="@mipmap/ic_launcher_round"
         android:id="@id/homeListFragment"
         android:title="home" />
     <item
+        android:icon="@mipmap/ic_launcher_round"
         android:id="@id/personalFragment"
         android:title="mine" />
 </menu>
