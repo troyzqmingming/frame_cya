@@ -9,20 +9,15 @@ import com.cya.frame.retrofit.BaseResult
  */
 open class BaseRepository {
 
-    /**
-     * @param errorMsg 会自动传递到BaseResult.Failed
-     */
     suspend fun <T : Any> safeCall(
-        call: suspend () -> BaseResult<T>,
-        errorMsg: String = "获取失败,请稍后重试"
+        call: suspend () -> BaseResult<T>
     ): BaseResult<T> {
         return try {
             call()
         } catch (e: Exception) {
-            ("Exception msg:\t${e.message}\n" +
-                    "errorMsg:\t$errorMsg").logE()
+            "Exception msg:\t${e.message}\n".logE()
             with(ExceptionEngine.handleException(e)) {
-                BaseResult.Failed(this, errorMsg)
+                BaseResult.Failed(this, "Exception msg:\t${e.message}\n")
             }
         }
     }
