@@ -1,9 +1,8 @@
 package com.cya.frame.demo.di
 
-import com.cya.frame.demo.bean.result.UserResult
-import com.google.gson.Gson
+import com.cya.frame.demo.ext.getUserCache
 
 
 fun isLogin() = Config.Account.isLogin
 
-fun getUserInfo() = Gson().fromJson(Config.Account.userInfoData, UserResult::class.java) ?: null
+fun getUserInfo() = Config.Account.getUserCache()

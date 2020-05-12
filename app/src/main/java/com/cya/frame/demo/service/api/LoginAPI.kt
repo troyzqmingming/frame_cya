@@ -6,7 +6,7 @@ import retrofit2.http.FieldMap
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
-interface LoginService {
+interface LoginAPI {
 
     @FormUrlEncoded
     @POST("user/login")

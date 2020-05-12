@@ -5,7 +5,7 @@ import com.cya.frame.demo.bean.result.ArticleResult
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface HomeService {
+interface HomeAPI {
 
 
     interface Article {

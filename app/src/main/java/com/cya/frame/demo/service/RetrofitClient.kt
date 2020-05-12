@@ -1,6 +1,9 @@
 package com.cya.frame.demo.service
 
 import com.cya.frame.CyaSDK
+import com.cya.frame.demo.service.api.BaseUrl
+import com.cya.frame.demo.service.api.HomeAPI
+import com.cya.frame.demo.service.api.LoginAPI
 import com.cya.frame.retrofit.BaseRetrofitClient
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -21,3 +24,17 @@ class RetrofitClient : BaseRetrofitClient() {
     }
 
 }
+
+val retrofitClient = RetrofitClient()
+
+object LoginService :
+    LoginAPI by retrofitClient.getService(
+        LoginAPI::class.java
+        , BaseUrl.URL_WAN_ANDROID
+    )
+
+object HomeArticleService :
+    HomeAPI.Article by retrofitClient.getService(
+        HomeAPI.Article::class.java,
+        BaseUrl.URL_WAN_ANDROID
+    )
