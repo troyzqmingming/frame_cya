@@ -5,11 +5,11 @@ import com.cya.frame.base.ui.BaseMVVMFragment
 import com.cya.frame.demo.bean.result.UserResult
 import com.cya.frame.demo.data.Contract
 import com.cya.frame.demo.databinding.FragmentPersonalBinding
+import com.cya.frame.demo.di.getUserInfo
+import com.cya.frame.demo.di.isLogin
 import com.cya.frame.demo.login.LoginActivity
 import com.cya.frame.demo.personal.vm.PersonalViewModel
-import com.cya.frame.ext.gone
-import com.cya.frame.ext.startActivity
-import com.cya.frame.ext.visible
+import com.cya.frame.ext.*
 import com.jeremyliao.liveeventbus.LiveEventBus
 import org.koin.android.viewmodel.ext.android.getViewModel
 
@@ -28,6 +28,7 @@ class PersonalFragment : BaseMVVMFragment<FragmentPersonalBinding, PersonalViewM
     }
 
     override fun initData() {
+        setUserView(isLogin(), getUserInfo())
     }
 
     override fun initViewModel(): PersonalViewModel {
@@ -35,10 +36,6 @@ class PersonalFragment : BaseMVVMFragment<FragmentPersonalBinding, PersonalViewM
     }
 
     override fun startObserve() {
-        vm.uiState.observe(this, Observer {
-            setUserView(it.isLogin, it.userResult)
-
-        })
         LiveEventBus
             .get(Contract.EventKey.User.UPDATE_INFO, UserResult::class.java)
             .observe(this, Observer {
@@ -52,11 +49,11 @@ class PersonalFragment : BaseMVVMFragment<FragmentPersonalBinding, PersonalViewM
     }
 
     private fun setUserView(isLogin: Boolean = false, userResult: UserResult?) {
-        if (isLogin) {
+        isLogin.yes {
             binding.llPartLogin.gone()
             binding.llPartUserInfo.visible()
             binding.tvUserName.text = userResult?.nickname
-        } else {
+        }.otherwise {
             binding.llPartLogin.visible()
             binding.llPartUserInfo.gone()
         }

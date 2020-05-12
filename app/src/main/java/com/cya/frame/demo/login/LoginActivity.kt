@@ -1,15 +1,15 @@
 package com.cya.frame.demo.login
 
-import android.app.ProgressDialog
-import android.widget.Toast
 import androidx.lifecycle.Observer
-import com.cya.frame.base.ui.BaseMVVMActivity
+import com.cya.frame.demo.base.DemoMVVMActivity
+import com.cya.frame.demo.base.vm.DemoBaseViewModel
+import com.cya.frame.demo.bean.result.UserResult
 import com.cya.frame.demo.databinding.ActivityLoginBinding
 import com.cya.frame.demo.login.vm.LoginViewModel
 import com.cya.frame.ext.toast
 import org.koin.android.viewmodel.ext.android.getViewModel
 
-class LoginActivity : BaseMVVMActivity<ActivityLoginBinding, LoginViewModel>() {
+class LoginActivity : DemoMVVMActivity<ActivityLoginBinding, LoginViewModel>() {
 
 
     override fun initViewModel(): LoginViewModel {
@@ -20,48 +20,49 @@ class LoginActivity : BaseMVVMActivity<ActivityLoginBinding, LoginViewModel>() {
         return ActivityLoginBinding.inflate(layoutInflater)
     }
 
+    override fun showLoading() {
+        super.showLoading()
+        showCommonProgress()
+    }
+
+    override fun hideLoading() {
+        super.hideLoading()
+        dismissCommonProgress()
+    }
+
     override fun startObserve() {
+        super.startObserve()
         vm.apply {
-            //ui update
-            mUiState.observe(this@LoginActivity, Observer<LoginViewModel.UIState> {
-                if (it.showProgress) {
-                    showProgressDialog()
-                }
-                if (it.hideProgress) {
-                    dismissProgressDialog()
-                }
-                it.userInfo?.let { user ->
-                    binding.tvMsg.text = user.nickname
-                    finish()
-                }
-                it.errorMsg?.let { error ->
-                    toast(error)
-                }
-            })
+            userState.observe(
+                this@LoginActivity,
+                Observer<DemoBaseViewModel.DataState<UserResult>> {
+                    it.data?.let { user ->
+                        binding.tvMsg.text = user.nickname
+                        finish()
+                    }
+                    it.errorMsg?.let { error ->
+                        toast(error)
+                    }
+                })
         }
     }
 
     override fun initView() {
         binding.btnLogin.setOnClickListener {
-            vm.loginWanAndroid(binding.etPhone.text.toString(), binding.etCode.text.toString())
+            vm.loginWanAndroid(
+                binding.etPhone.text.toString().trim(),
+                binding.etCode.text.toString().trim()
+            )
         }
         binding.btnRegister.setOnClickListener {
-            vm.registerWanAndroid(binding.etPhone.text.toString(), binding.etCode.text.toString())
+            vm.registerWanAndroid(
+                binding.etPhone.text.toString().trim(),
+                binding.etCode.text.toString().trim()
+            )
         }
-
     }
 
     override fun initData() {
     }
 
-    private var progressDialog: ProgressDialog? = null
-    private fun showProgressDialog() {
-        if (progressDialog == null)
-            progressDialog = ProgressDialog(this)
-        progressDialog?.show()
-    }
-
-    private fun dismissProgressDialog() {
-        progressDialog?.dismiss()
-    }
 }

@@ -75,8 +75,8 @@ dependencies {
     //permission
     implementation 'com.afollestad.assent:core:3.0.0-RC4'
 
-    implementation project(":frame")
-//    implementation 'com.lib:cya_frame:1.0.1'
+//    implementation project(":frame")
+    implementation 'com.lib:cya_frame:1.0.2'
 
     implementation "android.arch.navigation:navigation-fragment-ktx:2.3.0-alpha01"
     implementation "android.arch.navigation:navigation-ui-ktx:2.3.0-alpha01"

@@ -1,4 +1,4 @@
-package com.cya.frame.demo.base
+package com.cya.frame.demo.di
 
 import com.cya.frame.demo.home.vm.HomeListRepository
 import com.cya.frame.demo.home.vm.HomeListViewModel
@@ -19,4 +19,7 @@ val repositoryModule = module {
     single { HomeListRepository() }
 }
 
-val appModule = listOf(viewModelModule, repositoryModule)
+val appModule = listOf(
+    viewModelModule,
+    repositoryModule
+)

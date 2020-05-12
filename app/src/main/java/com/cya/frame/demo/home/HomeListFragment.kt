@@ -6,7 +6,9 @@ import com.afollestad.assent.runWithPermissions
 import com.cya.frame.base.ui.BaseMVVMFragment
 import com.cya.frame.demo.databinding.FragmentHomeListBinding
 import com.cya.frame.demo.home.vm.HomeListViewModel
+import com.cya.frame.ext.otherwise
 import com.cya.frame.ext.toast
+import com.cya.frame.ext.yes
 import org.koin.android.viewmodel.ext.android.getViewModel
 
 class HomeListFragment : BaseMVVMFragment<FragmentHomeListBinding, HomeListViewModel>() {
@@ -26,25 +28,16 @@ class HomeListFragment : BaseMVVMFragment<FragmentHomeListBinding, HomeListViewM
     override fun startObserve() {
         vm.apply {
             uiState.observe(viewLifecycleOwner, Observer {
-                if (it.isRefreshArticle) {
+                (vm.curPageId == 0).yes {
+                    articleAdapter.setNewData(it.data)
                     binding.refreshLayout.finishRefresh()
-                }
-                if (it.isLoadMoreArticle) {
+                }.otherwise {
+                    it.data?.let { it1 -> articleAdapter.addData(it1) }
                     binding.refreshLayout.finishLoadMore()
-                }
-                if (it.isGetDataSuccess) {
-                    it.articleList?.let { list ->
-                        if (it.isRefreshArticle) {
-                            articleAdapter.setNewData(it.articleList)
-                        } else {
-                            articleAdapter.addData(list)
-                        }
-                    }
                 }
                 it.errorMsg?.let { msg ->
                     toast(msg)
                 }
-
             })
         }
     }
