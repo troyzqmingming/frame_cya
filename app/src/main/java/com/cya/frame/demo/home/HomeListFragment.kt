@@ -35,7 +35,7 @@ class HomeListFragment : BaseMVVMFragment<FragmentHomeListBinding, HomeListViewM
                     it.data?.let { it1 -> articleAdapter.addData(it1) }
                     binding.refreshLayout.finishLoadMore()
                 }
-                it.errorMsg?.let { msg ->
+                it.msg?.let { msg ->
                     toast(msg)
                 }
             })

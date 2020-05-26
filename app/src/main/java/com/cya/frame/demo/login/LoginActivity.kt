@@ -2,7 +2,7 @@ package com.cya.frame.demo.login
 
 import androidx.lifecycle.Observer
 import com.cya.frame.demo.base.DemoMVVMActivity
-import com.cya.frame.demo.base.vm.DemoBaseViewModel
+import com.cya.frame.demo.base.Resource
 import com.cya.frame.demo.bean.result.UserResult
 import com.cya.frame.demo.databinding.ActivityLoginBinding
 import com.cya.frame.demo.login.vm.LoginViewModel
@@ -35,12 +35,12 @@ class LoginActivity : DemoMVVMActivity<ActivityLoginBinding, LoginViewModel>() {
         vm.apply {
             userState.observe(
                 this@LoginActivity,
-                Observer<DemoBaseViewModel.DataState<UserResult>> {
+                Observer<Resource<UserResult>> {
                     it.data?.let { user ->
                         binding.tvMsg.text = user.nickname
                         finish()
                     }
-                    it.errorMsg?.let { error ->
+                    it.msg?.let { error ->
                         toast(error)
                     }
                 })

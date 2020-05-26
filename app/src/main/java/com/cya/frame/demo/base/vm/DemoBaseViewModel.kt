@@ -15,10 +15,6 @@ import kotlinx.coroutines.launch
 
 abstract class DemoBaseViewModel<V : ViewBinding, R : BaseRepository>(repository: R) :
     BaseViewModel<V, R>(repository) {
-    /**
-     * 通用数据状态
-     */
-    data class DataState<T>(var data: T?, var errorMsg: String?)
 
     val demoUIState = MutableLiveData<DemoUIState>()
 
