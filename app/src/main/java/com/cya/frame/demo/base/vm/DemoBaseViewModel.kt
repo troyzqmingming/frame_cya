@@ -2,11 +2,11 @@ package com.cya.frame.demo.base.vm
 
 import androidx.lifecycle.*
 import androidx.viewbinding.ViewBinding
+import com.cya.frame.base.holder.Loading
+import com.cya.frame.base.holder.State
+import com.cya.frame.base.holder.UIState
 import com.cya.frame.base.vm.BaseRepository
 import com.cya.frame.base.vm.BaseViewModel
-import com.cya.frame.demo.base.DemoUIState
-import com.cya.frame.demo.base.HideLoading
-import com.cya.frame.demo.base.ShowLoading
 import com.cya.frame.exception.CyaException
 import com.cya.frame.exception.ExceptionEngine
 import com.cya.frame.retrofit.BaseResult
@@ -15,8 +15,6 @@ import kotlinx.coroutines.launch
 
 abstract class DemoBaseViewModel<V : ViewBinding, R : BaseRepository>(repository: R) :
     BaseViewModel<V, R>(repository) {
-
-    val demoUIState = MutableLiveData<DemoUIState>()
 
     fun <T : Any> launchResult(
         block: suspend CoroutineScope.() -> BaseResult<T>,
@@ -27,9 +25,9 @@ abstract class DemoBaseViewModel<V : ViewBinding, R : BaseRepository>(repository
     ) {
         viewModelScope.launch {
             try {
-                demoUIState.value = ShowLoading
+                emit(Loading::class.java, UIState(State.LOADING_SHOW))
                 val result = block()
-                demoUIState.value = HideLoading
+                emit(Loading::class.java, UIState(State.LOADING_HIDE))
                 when (result) {
                     is BaseResult.Success -> {
                         successBlock(result.data)
@@ -39,7 +37,7 @@ abstract class DemoBaseViewModel<V : ViewBinding, R : BaseRepository>(repository
                     }
                 }
             } catch (e: Exception) {
-                demoUIState.value = HideLoading
+                emit(Loading::class.java, UIState(State.LOADING_HIDE))
                 val cyaException = ExceptionEngine.handleException(e)
                 if (exceptionBlock == null) {
                     failedBlock(executeException(cyaException))
@@ -48,7 +46,7 @@ abstract class DemoBaseViewModel<V : ViewBinding, R : BaseRepository>(repository
                 }
 
             } finally {
-                demoUIState.value = HideLoading
+                emit(Loading::class.java, UIState(State.LOADING_HIDE))
                 completeBlock?.invoke()
             }
         }

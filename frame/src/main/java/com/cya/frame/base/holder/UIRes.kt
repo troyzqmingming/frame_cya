@@ -3,6 +3,8 @@ package com.cya.frame.base.holder
 enum class State {
     SUCCESS,
     FAILED,
+    LOADING_SHOW,
+    LOADING_HIDE
 }
 
 /**
@@ -18,3 +20,5 @@ open class UIState<T>(
     //预留字段
     var ext: Any? = null
 )
+
+sealed class Loading

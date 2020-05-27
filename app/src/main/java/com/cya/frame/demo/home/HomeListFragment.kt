@@ -3,7 +3,9 @@ package com.cya.frame.demo.home
 import androidx.lifecycle.Observer
 import com.afollestad.assent.Permission
 import com.afollestad.assent.runWithPermissions
+import com.cya.frame.base.holder.State
 import com.cya.frame.base.ui.BaseMVVMFragment
+import com.cya.frame.demo.bean.result.Article
 import com.cya.frame.demo.databinding.FragmentHomeListBinding
 import com.cya.frame.demo.home.vm.HomeListViewModel
 import com.cya.frame.ext.otherwise
@@ -27,18 +29,24 @@ class HomeListFragment : BaseMVVMFragment<FragmentHomeListBinding, HomeListViewM
 
     override fun startObserve() {
         vm.apply {
-            uiState.observe(viewLifecycleOwner, Observer {
-                (vm.curPageId == 0).yes {
-                    articleAdapter.setNewData(it.data)
-                    binding.refreshLayout.finishRefresh()
-                }.otherwise {
-                    it.data?.let { it1 -> articleAdapter.addData(it1) }
-                    binding.refreshLayout.finishLoadMore()
-                }
-                it.msg?.let { msg ->
-                    toast(msg)
-                }
-            })
+            getListObservable(Article::class.java)
+                .observe(viewLifecycleOwner, Observer {
+                    when (it.state) {
+                        State.SUCCESS -> {
+                            (vm.curPageId == 0).yes {
+                                articleAdapter.setNewData(it.data)
+                                binding.refreshLayout.finishRefresh()
+                            }.otherwise {
+                                it.data?.let { it1 -> articleAdapter.addData(it1) }
+                                binding.refreshLayout.finishLoadMore()
+                            }
+                        }
+                        State.FAILED -> {
+                            it.msg?.let { it1 -> toast(it1) }
+                        }
+                    }
+
+                })
         }
     }
 

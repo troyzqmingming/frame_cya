@@ -1,7 +1,7 @@
 package com.cya.frame.demo.login.vm
 
-import androidx.lifecycle.MutableLiveData
-import com.cya.frame.demo.base.Resource
+import com.cya.frame.base.holder.UIState
+import com.cya.frame.base.holder.State
 import com.cya.frame.demo.base.vm.DemoBaseViewModel
 import com.cya.frame.demo.bean.result.UserResult
 import com.cya.frame.demo.data.Contract
@@ -11,10 +11,10 @@ import com.jeremyliao.liveeventbus.LiveEventBus
 class LoginViewModel(repository: LoginRepository) :
     DemoBaseViewModel<ActivityLoginBinding, LoginRepository>(repository) {
 
-    private val _userState = MutableLiveData<Resource<UserResult>>()
-
-    val userState
-        get() = _userState
+    var testCount = 0
+    fun testButton() {
+        emit(Int::class.java, UIState(data = ++testCount))
+    }
 
     fun loginWanAndroid(username: String, password: String) {
         launchResult({
@@ -25,9 +25,7 @@ class LoginViewModel(repository: LoginRepository) :
             LiveEventBus.get(Contract.EventKey.User.UPDATE_INFO, UserResult::class.java)
                 .post(it)
         }, {
-            emitUIState(
-                errorMsg = it
-            )
+            emitUIState(state = State.FAILED, errorMsg = it)
         })
     }
 
@@ -36,25 +34,22 @@ class LoginViewModel(repository: LoginRepository) :
             repository.requestRegisterWanAndroid(username, password)
 
         }, {
-            emitUIState(
-                userInfo = it
-            )
+            emitUIState(userInfo = it)
             //通知登陆成功
             LiveEventBus.get(Contract.EventKey.User.UPDATE_INFO, UserResult::class.java)
                 .post(it)
         }, {
-            emitUIState(
-                errorMsg = it
-            )
+            emitUIState(state = State.FAILED, errorMsg = it)
         })
     }
 
 
     private fun emitUIState(
+        state: State = State.SUCCESS,
         userInfo: UserResult? = null,
         errorMsg: String? = null
     ) {
-        userState.value = Resource(userInfo, msg = errorMsg)
+        emit(UserResult::class.java, UIState(state = state, data = userInfo, msg = errorMsg))
     }
 
 }

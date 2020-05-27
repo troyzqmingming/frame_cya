@@ -3,6 +3,8 @@ package com.cya.frame.demo.base
 import android.app.ProgressDialog
 import androidx.lifecycle.Observer
 import androidx.viewbinding.ViewBinding
+import com.cya.frame.base.holder.Loading
+import com.cya.frame.base.holder.State
 import com.cya.frame.base.ui.BaseMVVMActivity
 import com.cya.frame.demo.base.vm.DemoBaseViewModel
 
@@ -24,10 +26,10 @@ abstract class DemoMVVMActivity<V : ViewBinding, VM : DemoBaseViewModel<V, *>> :
     open fun hideLoading() {}
 
     override fun startObserve() {
-        vm.demoUIState.observe(this, Observer {
-            when (it) {
-                ShowLoading -> showLoading()
-                HideLoading -> hideLoading()
+        vm.getObservable(Loading::class.java).observe(this, Observer {
+            when (it.state) {
+                State.LOADING_SHOW -> showLoading()
+                State.LOADING_HIDE -> hideLoading()
             }
         })
     }

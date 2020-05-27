@@ -1,20 +1,16 @@
 package com.cya.frame.demo.home.vm
 
-import androidx.lifecycle.MutableLiveData
-import com.cya.frame.demo.base.Resource
+import com.cya.frame.base.holder.UIState
+import com.cya.frame.base.holder.State
 import com.cya.frame.demo.base.vm.DemoBaseViewModel
 import com.cya.frame.demo.bean.result.Article
 import com.cya.frame.demo.databinding.FragmentHomeListBinding
 import com.cya.frame.ext.otherwise
 import com.cya.frame.ext.yes
-import kotlinx.coroutines.withContext
 
 class HomeListViewModel(repository: HomeListRepository) :
     DemoBaseViewModel<FragmentHomeListBinding, HomeListRepository>(repository) {
 
-    private var _uiState = MutableLiveData<Resource<MutableList<Article>>>()
-    val uiState
-        get() = _uiState
 
     var curPageId = 0
 
@@ -31,16 +27,17 @@ class HomeListViewModel(repository: HomeListRepository) :
                 }
             )
         }, {
-            emitUIState(it?.list)
+            emitUIState(articleList = it?.list)
         }, {
-            emitUIState(errorMsg = it)
+            emitUIState(state = State.FAILED, errorMsg = it)
         })
     }
 
     private fun emitUIState(
+        state: State = State.SUCCESS,
         articleList: MutableList<Article>? = null,
         errorMsg: String? = null
     ) {
-        _uiState.value = Resource(articleList, msg = errorMsg)
+        emit2(Article::class.java, UIState(state = state, data = articleList, msg = errorMsg))
     }
 }

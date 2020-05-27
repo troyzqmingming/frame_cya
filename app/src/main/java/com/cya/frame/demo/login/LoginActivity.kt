@@ -1,8 +1,9 @@
 package com.cya.frame.demo.login
 
 import androidx.lifecycle.Observer
+import com.cya.frame.base.holder.UIState
+import com.cya.frame.base.holder.State
 import com.cya.frame.demo.base.DemoMVVMActivity
-import com.cya.frame.demo.base.Resource
 import com.cya.frame.demo.bean.result.UserResult
 import com.cya.frame.demo.databinding.ActivityLoginBinding
 import com.cya.frame.demo.login.vm.LoginViewModel
@@ -33,17 +34,25 @@ class LoginActivity : DemoMVVMActivity<ActivityLoginBinding, LoginViewModel>() {
     override fun startObserve() {
         super.startObserve()
         vm.apply {
-            userState.observe(
+            getObservable(UserResult::class.java).observe(
                 this@LoginActivity,
-                Observer<Resource<UserResult>> {
-                    it.data?.let { user ->
-                        binding.tvMsg.text = user.nickname
-                        finish()
-                    }
-                    it.msg?.let { error ->
-                        toast(error)
+                Observer<UIState<UserResult>> {
+                    when (it.state) {
+                        State.SUCCESS -> {
+                            binding.tvMsg.text = it.data?.nickname
+                            finish()
+                        }
+                        State.FAILED -> {
+                            it.msg?.let { it1 -> toast(it1) }
+                        }
                     }
                 })
+            getObservable(Int::class.java).observe(
+                this@LoginActivity,
+                Observer {
+                    binding.btnTest.text = it.data.toString()
+                }
+            )
         }
     }
 
@@ -59,6 +68,9 @@ class LoginActivity : DemoMVVMActivity<ActivityLoginBinding, LoginViewModel>() {
                 binding.etPhone.text.toString().trim(),
                 binding.etCode.text.toString().trim()
             )
+        }
+        binding.btnTest.setOnClickListener {
+            vm.testButton()
         }
     }
 
