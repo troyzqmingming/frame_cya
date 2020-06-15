@@ -68,9 +68,7 @@ class HomeListFragment : BaseMVVMFragment<FragmentHomeListBinding, HomeListViewM
                 vm.loadArticle(false)
             }
         }
-        runWithPermissions(Permission.CAMERA, Permission.WRITE_EXTERNAL_STORAGE) {
-            binding.refreshLayout.autoRefresh()
-        }
+        binding.refreshLayout.autoRefresh()
     }
 
     override fun initData() {

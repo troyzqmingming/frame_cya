@@ -74,6 +74,8 @@ dependencies {
     implementation "org.koin:koin-android-viewmodel:2.1.5"
     //permission
     implementation 'com.afollestad.assent:core:3.0.0-RC4'
+    //download
+    implementation "com.github.ssseasonnn.RxDownload:rxdownload4:1.0.9"
 
 //    implementation project(":frame")
     implementation 'com.lib:cya_frame:1.0.2'
