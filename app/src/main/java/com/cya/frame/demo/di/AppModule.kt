@@ -1,10 +1,11 @@
 package com.cya.frame.demo.di
 
-import com.cya.frame.demo.home.vm.HomeListRepository
-import com.cya.frame.demo.home.vm.HomeListViewModel
-import com.cya.frame.demo.login.vm.LoginRepository
-import com.cya.frame.demo.login.vm.LoginViewModel
-import com.cya.frame.demo.personal.vm.PersonalViewModel
+import com.cya.frame.demo.base.vm.DemoBaseRepository
+import com.cya.frame.demo.ui.article.ArticleListRepository
+import com.cya.frame.demo.ui.article.ArticleListViewModel
+import com.cya.frame.demo.ui.login.LoginRepository
+import com.cya.frame.demo.ui.login.LoginViewModel
+import com.cya.frame.demo.ui.mine.MineViewModel
 import com.cya.frame.demo.service.HomeArticleService
 import com.cya.frame.demo.service.LoginService
 import com.cya.frame.demo.service.api.HomeAPI
@@ -14,13 +15,14 @@ import org.koin.dsl.module
 
 val viewModelModule = module {
     viewModel { LoginViewModel(get()) }
-    viewModel { HomeListViewModel(get()) }
-    viewModel { PersonalViewModel(get()) }
+    viewModel { ArticleListViewModel(get()) }
+    viewModel { MineViewModel(get()) }
 }
 
 val repositoryModule = module {
+    single { DemoBaseRepository() }
     single { LoginRepository(get()) }
-    single { HomeListRepository(get()) }
+    single { ArticleListRepository(get()) }
 }
 
 val remoteModule = module {

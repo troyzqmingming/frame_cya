@@ -1,14 +1,14 @@
-package com.cya.frame.demo.personal.vm
+package com.cya.frame.demo.ui.mine
 
 import com.cya.frame.base.holder.Loading
 import com.cya.frame.base.holder.State
 import com.cya.frame.base.holder.UIState
 import com.cya.frame.base.vm.BaseViewModel
 import com.cya.frame.demo.data.Contract
-import com.cya.frame.demo.databinding.FragmentPersonalBinding
+import com.cya.frame.demo.databinding.FragmentMineBinding
 import com.cya.frame.demo.di.FILE_PRIVATE_PATH_ROOT
 import com.cya.frame.demo.di.getFileNameFormUrl
-import com.cya.frame.demo.login.vm.LoginRepository
+import com.cya.frame.demo.ui.login.LoginRepository
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.orhanobut.logger.Logger
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -18,8 +18,8 @@ import io.reactivex.schedulers.Schedulers
 import zlc.season.rxdownload4.download
 import zlc.season.rxdownload4.task.Task
 
-class PersonalViewModel(repository: LoginRepository) :
-    BaseViewModel<FragmentPersonalBinding, LoginRepository>(repository) {
+class MineViewModel(repository: LoginRepository) :
+    BaseViewModel<FragmentMineBinding, LoginRepository>(repository) {
 
     fun logoutUser() {
         repository.logoutWanAndroid {

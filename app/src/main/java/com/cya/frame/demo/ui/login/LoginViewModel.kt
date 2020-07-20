@@ -1,15 +1,15 @@
-package com.cya.frame.demo.login.vm
+package com.cya.frame.demo.ui.login
 
 import com.cya.frame.base.holder.UIState
 import com.cya.frame.base.holder.State
 import com.cya.frame.demo.base.vm.DemoBaseViewModel
 import com.cya.frame.demo.bean.result.UserResult
 import com.cya.frame.demo.data.Contract
-import com.cya.frame.demo.databinding.ActivityLoginBinding
+import com.cya.frame.demo.databinding.FragmentLoginBinding
 import com.jeremyliao.liveeventbus.LiveEventBus
 
 class LoginViewModel(repository: LoginRepository) :
-    DemoBaseViewModel<ActivityLoginBinding, LoginRepository>(repository) {
+    DemoBaseViewModel<FragmentLoginBinding, LoginRepository>(repository) {
 
     var testCount = 0
     fun testButton() {

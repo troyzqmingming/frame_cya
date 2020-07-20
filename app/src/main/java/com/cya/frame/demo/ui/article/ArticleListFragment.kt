@@ -1,30 +1,30 @@
-package com.cya.frame.demo.home
+package com.cya.frame.demo.ui.article
 
 import androidx.lifecycle.Observer
-import com.afollestad.assent.Permission
-import com.afollestad.assent.runWithPermissions
 import com.cya.frame.base.holder.State
-import com.cya.frame.base.ui.BaseMVVMFragment
+import com.cya.frame.demo.R
+import com.cya.frame.demo.base.DemoBaseMVVMFragment
 import com.cya.frame.demo.bean.result.Article
-import com.cya.frame.demo.databinding.FragmentHomeListBinding
-import com.cya.frame.demo.home.vm.HomeListViewModel
+import com.cya.frame.demo.databinding.FragmentArticleListBinding
+import com.cya.frame.demo.ext.nav
 import com.cya.frame.ext.otherwise
 import com.cya.frame.ext.toast
 import com.cya.frame.ext.yes
 import org.koin.android.viewmodel.ext.android.getViewModel
 
-class HomeListFragment : BaseMVVMFragment<FragmentHomeListBinding, HomeListViewModel>() {
+class ArticleListFragment :
+    DemoBaseMVVMFragment<FragmentArticleListBinding, ArticleListViewModel>() {
 
     private val articleAdapter by lazy {
-        HomeListAdapter()
+        ArticleListAdapter()
     }
 
-    override fun initViewModel(): HomeListViewModel {
+    override fun initViewModel(): ArticleListViewModel {
         return getViewModel()
     }
 
-    override fun getViewBinding(): FragmentHomeListBinding {
-        return FragmentHomeListBinding.inflate(layoutInflater)
+    override fun getViewBinding(): FragmentArticleListBinding {
+        return FragmentArticleListBinding.inflate(layoutInflater)
     }
 
     override fun startObserve() {
@@ -44,6 +44,8 @@ class HomeListFragment : BaseMVVMFragment<FragmentHomeListBinding, HomeListViewM
                         State.FAILED -> {
                             it.msg?.let { it1 -> toast(it1) }
                         }
+                        else -> {
+                        }
                     }
 
                 })
@@ -57,7 +59,7 @@ class HomeListFragment : BaseMVVMFragment<FragmentHomeListBinding, HomeListViewM
         }
         articleAdapter.run {
             setOnItemClickListener { adapter, view, position ->
-
+                nav(R.id.action_mainFragment_to_articleDetailFragment)
             }
         }
         binding.refreshLayout.run {

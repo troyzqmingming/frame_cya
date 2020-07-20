@@ -1,4 +1,4 @@
-package com.cya.frame.demo.login.vm
+package com.cya.frame.demo.ui.login
 
 import com.cya.frame.demo.base.vm.DemoBaseRepository
 import com.cya.frame.demo.bean.result.UserResult

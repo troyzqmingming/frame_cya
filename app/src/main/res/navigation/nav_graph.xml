@@ -3,26 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/personalFragment">
+    app:startDestination="@id/mainFragment">
 
 
     <fragment
-        android:id="@+id/homeListFragment"
-        android:name="com.cya.frame.demo.home.HomeListFragment"
-        android:label="HomeListFragment"
-        tools:layout="@layout/fragment_home_list" />
-    <fragment
-        android:id="@+id/personalFragment"
-        android:name="com.cya.frame.demo.personal.PersonalFragment"
-        android:label="PersonalFragment"
-        tools:layout="@layout/fragment_personal">
+        android:id="@+id/mainFragment"
+        android:name="com.cya.frame.demo.ui.main.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main">
+
         <action
-            android:id="@+id/action_personalFragment_to_loginActivity"
-            app:destination="@id/loginActivity" />
+            android:id="@+id/action_mainFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_articleDetailFragment"
+            app:destination="@id/articleDetailFragment" />
     </fragment>
-    <activity
-        android:id="@+id/loginActivity"
-        android:name="com.cya.frame.demo.login.LoginActivity"
-        android:label="LoginActivity"
-        tools:layout="@layout/activity_login" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.cya.frame.demo.ui.login.LoginFragment"
+        android:label="loginFragment"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/articleDetailFragment"
+        android:name="com.cya.frame.demo.ui.article.detail.ArticleDetailFragment"
+        android:label="ArticleDetailFragment"
+        tools:layout="@layout/fragment_article_detail" />
+
+
 </navigation>

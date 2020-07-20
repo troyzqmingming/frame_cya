@@ -1,20 +1,20 @@
-package com.cya.frame.demo.navi
+package com.cya.frame.demo.ui.main
 
 import androidx.fragment.app.Fragment
-import com.cya.frame.base.ui.BaseActivity
 import com.cya.frame.demo.R
-import com.cya.frame.demo.databinding.ActivityNaviBinding
-import com.cya.frame.demo.home.HomeListFragment
-import com.cya.frame.demo.personal.PersonalFragment
+import com.cya.frame.demo.base.DemoBaseFragment
+import com.cya.frame.demo.databinding.FragmentMainBinding
+import com.cya.frame.demo.ui.article.ArticleListFragment
+import com.cya.frame.demo.ui.mine.MineFragment
 import com.cya.frame.ext.listener.setDefaultAdapter
 
-class NavigationActivity : BaseActivity<ActivityNaviBinding>() {
+class MainFragment : DemoBaseFragment<FragmentMainBinding>() {
 
     private val homeFragment by lazy {
-        HomeListFragment()
+        ArticleListFragment()
     }
     private val personalFragment by lazy {
-        PersonalFragment()
+        MineFragment()
     }
 
     private val fragmentList = mutableListOf<Fragment>()
@@ -26,27 +26,27 @@ class NavigationActivity : BaseActivity<ActivityNaviBinding>() {
         }
     }
 
-    override fun getViewBinding(): ActivityNaviBinding {
-        return ActivityNaviBinding.inflate(layoutInflater)
+    override fun getViewBinding(): FragmentMainBinding {
+        return FragmentMainBinding.inflate(layoutInflater)
     }
 
     override fun initView() {
         binding.viewpager.run {
             offscreenPageLimit = fragmentList.size
             isUserInputEnabled = true
-            setDefaultAdapter(this@NavigationActivity, fragmentList) {
+            setDefaultAdapter(this@MainFragment, fragmentList) {
                 when (it) {
-                    0 -> binding.navigationView.selectedItemId = R.id.homeListFragment
-                    1 -> binding.navigationView.selectedItemId = R.id.personalFragment
+                    0 -> binding.navigationView.selectedItemId = R.id.articleListFragment
+                    1 -> binding.navigationView.selectedItemId = R.id.mineFragment
                 }
             }
         }
         binding.navigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.homeListFragment -> {
+                R.id.articleListFragment -> {
                     binding.viewpager.currentItem = 0
                 }
-                R.id.personalFragment -> {
+                R.id.mineFragment -> {
                     binding.viewpager.currentItem = 1
                 }
             }

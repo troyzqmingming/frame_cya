@@ -1,15 +1,15 @@
-package com.cya.frame.demo.home.vm
+package com.cya.frame.demo.ui.article
 
 import com.cya.frame.base.holder.UIState
 import com.cya.frame.base.holder.State
 import com.cya.frame.demo.base.vm.DemoBaseViewModel
 import com.cya.frame.demo.bean.result.Article
-import com.cya.frame.demo.databinding.FragmentHomeListBinding
+import com.cya.frame.demo.databinding.FragmentArticleListBinding
 import com.cya.frame.ext.otherwise
 import com.cya.frame.ext.yes
 
-class HomeListViewModel(repository: HomeListRepository) :
-    DemoBaseViewModel<FragmentHomeListBinding, HomeListRepository>(repository) {
+class ArticleListViewModel(repository: ArticleListRepository) :
+    DemoBaseViewModel<FragmentArticleListBinding, ArticleListRepository>(repository) {
 
 
     var curPageId = 0

@@ -29,3 +29,28 @@ fun ViewPager2.setDefaultAdapter(
 
     return defaultAdapter
 }
+
+fun ViewPager2.setDefaultAdapter(
+    fragmentActivity: Fragment,
+    fragmentList: MutableList<Fragment>,
+    selectAction: ((position: Int) -> Unit)? = null
+): FragmentStateAdapter {
+    val defaultAdapter = object : FragmentStateAdapter(fragmentActivity) {
+        override fun getItemCount() = fragmentList.size
+
+        override fun createFragment(position: Int): Fragment {
+            return fragmentList[position]
+        }
+    }
+    adapter = defaultAdapter
+    selectAction?.let {
+        registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                it.invoke(position)
+            }
+        })
+    }
+
+    return defaultAdapter
+}
