@@ -21,18 +21,18 @@ class LoginFragment : DemoBaseMVVMFragment<FragmentLoginBinding, LoginViewModel>
         return FragmentLoginBinding.inflate(layoutInflater)
     }
 
-//    override fun showLoading() {
-//        super.showLoading()
-//        showCommonProgress()
-//    }
-//
-//    override fun hideLoading() {
-//        super.hideLoading()
-//        dismissCommonProgress()
-//    }
+    override fun showLoading() {
+        super.showLoading()
+        showCommonProgress()
+    }
+
+    override fun hideLoading() {
+        super.hideLoading()
+        dismissCommonProgress()
+    }
 
     override fun startObserve() {
-//        super.startObserve()
+        super.startObserve()
         vm.apply {
             getObservable(UserResult::class.java).observe(
                 this@LoginFragment,
