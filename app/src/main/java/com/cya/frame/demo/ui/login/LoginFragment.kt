@@ -1,10 +1,7 @@
 package com.cya.frame.demo.ui.login
 
 import androidx.lifecycle.Observer
-import com.cya.frame.base.holder.State
-import com.cya.frame.base.holder.UIState
 import com.cya.frame.demo.base.DemoBaseMVVMFragment
-import com.cya.frame.demo.bean.result.UserResult
 import com.cya.frame.demo.databinding.FragmentLoginBinding
 import com.cya.frame.demo.ext.finish
 import com.cya.frame.ext.toast
@@ -21,39 +18,13 @@ class LoginFragment : DemoBaseMVVMFragment<FragmentLoginBinding, LoginViewModel>
         return FragmentLoginBinding.inflate(layoutInflater)
     }
 
-    override fun showLoading() {
-        super.showLoading()
-        showCommonProgress()
-    }
-
-    override fun hideLoading() {
-        super.hideLoading()
-        dismissCommonProgress()
-    }
-
     override fun startObserve() {
         super.startObserve()
         vm.apply {
-            getObservable(UserResult::class.java).observe(
-                this@LoginFragment,
-                Observer<UIState<UserResult>> {
-                    when (it.state) {
-                        State.SUCCESS -> {
-                            binding.tvMsg.text = it.data?.nickname
-                            finish()
-                        }
-                        State.FAILED -> {
-                            it.msg?.let { it1 -> toast(it1) }
-                        }
-                        else -> {}
-                    }
-                })
-            getObservable(Int::class.java).observe(
-                this@LoginFragment,
-                Observer {
-                    binding.btnTest.text = it.data.toString()
-                }
-            )
+            loginLiveData.observe(this@LoginFragment, Observer {
+                toast("登录成功")
+                finish()
+            })
         }
     }
 
@@ -69,9 +40,6 @@ class LoginFragment : DemoBaseMVVMFragment<FragmentLoginBinding, LoginViewModel>
                 binding.etPhone.text.toString().trim(),
                 binding.etCode.text.toString().trim()
             )
-        }
-        binding.btnTest.setOnClickListener {
-            vm.testButton()
         }
     }
 

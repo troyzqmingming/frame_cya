@@ -1,43 +1,24 @@
 package com.cya.frame.base.vm
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.viewbinding.ViewBinding
-import com.cya.frame.base.holder.LiveDataHolder
-import com.cya.frame.base.holder.UIState
+import com.cya.frame.exception.CyaException
 
-abstract class BaseViewModel<V : ViewBinding, R : BaseRepository>(
+abstract class BaseViewModel<R : BaseRepository>(
     val repository: R
 ) :
     ViewModel() {
 
-    //使用map管理LiveData
-    private val holder = LiveDataHolder()
-
     /**
-     * 返回<T>
+     * 错误信息
      */
-    fun <T> getObservable(type: Class<T>) = run {
-        holder.getLiveData(type)
-    }
-
+    val errorLiveData = MutableLiveData<CyaException>()
     /**
-     * 返回list<T>
+     * 无更多数据
      */
-    fun <T> getListObservable(type: Class<T>) = kotlin.run {
-        holder.getListLiveData(type)
-    }
-
+    val noMoreLiveData = MutableLiveData<Any>()
     /**
-     * 发射<T>
+     * 无数据
      */
-    fun <T> emit(type: Class<T>, value: UIState<T>) {
-        getObservable(type).value = value
-    }
-
-    /**
-     * 发射list<T>
-     */
-    fun <T> emit2(type: Class<T>, value: UIState<MutableList<T>>) {
-        getListObservable(type).value = value
-    }
+    val emptyLiveData = MutableLiveData<Any>()
 }

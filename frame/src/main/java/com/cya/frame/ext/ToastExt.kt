@@ -5,6 +5,7 @@ import android.content.Context
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import com.cya.frame.CyaSDK
 import com.cya.frame.view.ToastView
 
 private fun Context.toast(@StringRes id: Int, duration: Int = Toast.LENGTH_SHORT) {
@@ -31,10 +32,10 @@ fun Fragment.toast(@StringRes id: Int, duration: Int = Toast.LENGTH_SHORT) {
     }
 }
 
-fun Any.toast(context: Context, msg: String, duration: Int = Toast.LENGTH_SHORT) {
-    ToastView.show(context, msg, duration)
+fun Any.toast(msg: String, duration: Int = Toast.LENGTH_SHORT) {
+    ToastView.show(CyaSDK.getContext(), msg, duration)
 }
 
-fun Any.toast(context: Context, @StringRes id: Int, duration: Int = Toast.LENGTH_SHORT) {
-    context.toast(id, duration)
+fun Any.toast(@StringRes id: Int, duration: Int = Toast.LENGTH_SHORT) {
+    CyaSDK.getContext().toast(id, duration)
 }

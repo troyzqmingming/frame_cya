@@ -1,11 +1,7 @@
 package com.cya.frame.demo.ui.mine
 
-import com.cya.frame.base.holder.Loading
-import com.cya.frame.base.holder.State
-import com.cya.frame.base.holder.UIState
 import com.cya.frame.base.vm.BaseViewModel
 import com.cya.frame.demo.data.Contract
-import com.cya.frame.demo.databinding.FragmentMineBinding
 import com.cya.frame.demo.di.FILE_PRIVATE_PATH_ROOT
 import com.cya.frame.demo.di.getFileNameFormUrl
 import com.cya.frame.demo.ui.login.LoginRepository
@@ -19,7 +15,7 @@ import zlc.season.rxdownload4.download
 import zlc.season.rxdownload4.task.Task
 
 class MineViewModel(repository: LoginRepository) :
-    BaseViewModel<FragmentMineBinding, LoginRepository>(repository) {
+    BaseViewModel<LoginRepository>(repository) {
 
     fun logoutUser() {
         repository.logoutWanAndroid {
@@ -27,41 +23,41 @@ class MineViewModel(repository: LoginRepository) :
         }
     }
 
-    fun downloadFile(
-        url: String,
-        saveName: String = getFileNameFormUrl(url),
-        savePath: String = FILE_PRIVATE_PATH_ROOT
-    ): Disposable? {
-        Logger.i(savePath)
-        return Task(url = url, saveName = saveName, savePath = savePath)
-            .download()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe {
-                Logger.i("文件名:$saveName")
-                Logger.i("文件地址:$savePath")
-                emit(Loading::class.java, UIState(State.LOADING_SHOW))
-            }
-            .doFinally {
-                emit(Loading::class.java, UIState(State.LOADING_HIDE))
-            }
-            .subscribeBy(
-                onNext = {
-                    Logger.i("下载进度:${(it.downloadSize.toDouble() / it.totalSize.toDouble() * 100).toInt()}\t/\t100%")
-                    emit(
-                        Loading::class.java,
-                        UIState(
-                            State.LOADING_SHOW,
-                            msg = "下载进度:${(it.downloadSize.toDouble() / it.totalSize.toDouble() * 100).toInt()}\t/\t100%"
-                        )
-                    )
-                },
-                onComplete = {
-                    Logger.i("下载完成")
-                },
-                onError = {
-                    Logger.i("下载异常${it.message}")
-                }
-            )
-    }
+//    fun downloadFile(
+//        url: String,
+//        saveName: String = getFileNameFormUrl(url),
+//        savePath: String = FILE_PRIVATE_PATH_ROOT
+//    ): Disposable? {
+//        Logger.i(savePath)
+//        return Task(url = url, saveName = saveName, savePath = savePath)
+//            .download()
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .doOnSubscribe {
+//                Logger.i("文件名:$saveName")
+//                Logger.i("文件地址:$savePath")
+//                emit(Loading::class.java, UIState(State.LOADING_SHOW))
+//            }
+//            .doFinally {
+//                emit(Loading::class.java, UIState(State.LOADING_HIDE))
+//            }
+//            .subscribeBy(
+//                onNext = {
+//                    Logger.i("下载进度:${(it.downloadSize.toDouble() / it.totalSize.toDouble() * 100).toInt()}\t/\t100%")
+//                    emit(
+//                        Loading::class.java,
+//                        UIState(
+//                            State.LOADING_SHOW,
+//                            msg = "下载进度:${(it.downloadSize.toDouble() / it.totalSize.toDouble() * 100).toInt()}\t/\t100%"
+//                        )
+//                    )
+//                },
+//                onComplete = {
+//                    Logger.i("下载完成")
+//                },
+//                onError = {
+//                    Logger.i("下载异常${it.message}")
+//                }
+//            )
+//    }
 }
