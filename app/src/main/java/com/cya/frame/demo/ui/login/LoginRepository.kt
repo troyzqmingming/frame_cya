@@ -6,7 +6,7 @@ import com.cya.frame.demo.di.Config
 import com.cya.frame.demo.ext.clearUserCache
 import com.cya.frame.demo.ext.saveUserCache
 import com.cya.frame.demo.service.api.LoginAPI
-import kotlinx.coroutines.CoroutineScope
+import com.cya.frame.exception.CyaException
 
 class LoginRepository(private val loginApi: LoginAPI) : DemoBaseRepository() {
 
@@ -16,12 +16,12 @@ class LoginRepository(private val loginApi: LoginAPI) : DemoBaseRepository() {
     }
 
     fun requestRegisterWanAndroid(
-        scope: CoroutineScope,
         username: String,
         password: String,
-        successBlock: (UserResult?) -> Unit
+        successBlock: (UserResult?) -> Unit,
+        error: (CyaException) -> Unit
     ) {
-        launch(scope,
+        launch(
             block = {
                 val mutableMap = mutableMapOf<String, Any?>()
                 mutableMap["username"] = username
@@ -32,18 +32,21 @@ class LoginRepository(private val loginApi: LoginAPI) : DemoBaseRepository() {
             success = {
                 successBlock.invoke(it)
                 Config.Account.saveUserCache(it)
+            },
+            error = {
+                error(it)
             }
 
         )
     }
 
     fun requestLoginWanAndroid(
-        scope: CoroutineScope,
         username: String,
         password: String,
-        successBlock: (UserResult?) -> Unit
+        successBlock: (UserResult?) -> Unit,
+        error: (CyaException) -> Unit
     ) {
-        launch(scope,
+        launch(
             block = {
                 val mutableMap = mutableMapOf<String, Any?>()
                 mutableMap["username"] = username
@@ -53,6 +56,9 @@ class LoginRepository(private val loginApi: LoginAPI) : DemoBaseRepository() {
             success = {
                 successBlock.invoke(it)
                 Config.Account.saveUserCache(it)
+            },
+            error = {
+                error(it)
             })
     }
 }

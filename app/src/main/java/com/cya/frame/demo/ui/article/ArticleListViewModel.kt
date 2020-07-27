@@ -2,7 +2,6 @@ package com.cya.frame.demo.ui.article
 
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.cya.frame.demo.base.vm.DemoBaseViewModel
 import com.cya.frame.demo.bean.result.ArticleResult
 import com.cya.frame.ext.otherwise
@@ -18,7 +17,7 @@ class ArticleListViewModel(repository: ArticleListRepository) :
     fun loadArticle(isRefresh: Boolean = true) = getArticleList(isRefresh)
 
     private fun getArticleList(isRefresh: Boolean) {
-        repository.requestArticleList(viewModelScope, curPageId) {
+        repository.requestArticleList(curPageId) {
             (isRefresh).yes {
                 curPageId = 0
                 curPageId

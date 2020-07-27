@@ -1,6 +1,7 @@
 package com.cya.frame.demo.ui.mine
 
 import com.cya.frame.base.vm.BaseViewModel
+import com.cya.frame.demo.base.vm.DemoBaseViewModel
 import com.cya.frame.demo.data.Contract
 import com.cya.frame.demo.di.FILE_PRIVATE_PATH_ROOT
 import com.cya.frame.demo.di.getFileNameFormUrl
@@ -15,7 +16,7 @@ import zlc.season.rxdownload4.download
 import zlc.season.rxdownload4.task.Task
 
 class MineViewModel(repository: LoginRepository) :
-    BaseViewModel<LoginRepository>(repository) {
+    DemoBaseViewModel<LoginRepository>(repository) {
 
     fun logoutUser() {
         repository.logoutWanAndroid {

@@ -1,5 +1,6 @@
 package com.cya.frame.base.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,10 @@ import androidx.viewbinding.ViewBinding
 abstract class BaseFragment<V : ViewBinding> : Fragment() {
 
     lateinit var binding: V
+
+    lateinit var mActivity: BaseActivity<*>
+
+    lateinit var mContext: Context
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,9 +32,15 @@ abstract class BaseFragment<V : ViewBinding> : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext = context
+        mActivity = context as BaseActivity<*>
+    }
+
     abstract fun getViewBinding(): V
 
-    open fun startObserve(){}
+    open fun startObserve() {}
 
     abstract fun initView()
 

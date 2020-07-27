@@ -1,7 +1,6 @@
 package com.cya.frame.demo.ui.login
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.cya.frame.demo.base.vm.DemoBaseViewModel
 import com.cya.frame.demo.bean.result.UserResult
 import com.cya.frame.demo.data.Contract
@@ -13,19 +12,28 @@ class LoginViewModel(repository: LoginRepository) :
     val loginLiveData = MutableLiveData<UserResult>()
 
     fun loginWanAndroid(username: String, password: String) {
-        repository.requestLoginWanAndroid(viewModelScope, username, password) {
+        showLoading()
+        repository.requestLoginWanAndroid(username, password, {
+            hideLoading()
             LiveEventBus.get(Contract.EventKey.User.UPDATE_INFO, UserResult::class.java)
                 .post(it)
             loginLiveData.postValue(it)
+        }) {
+            handlerError(it)
         }
     }
 
     fun registerWanAndroid(username: String, password: String) {
-        repository.requestRegisterWanAndroid(viewModelScope, username, password) {
+        showLoading()
+        repository.requestRegisterWanAndroid(username, password, {
+            hideLoading()
             LiveEventBus.get(Contract.EventKey.User.UPDATE_INFO, UserResult::class.java)
                 .post(it)
             loginLiveData.postValue(it)
+        }) {
+            handlerError(it)
         }
+
     }
 
 }

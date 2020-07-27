@@ -8,11 +8,10 @@ import kotlinx.coroutines.CoroutineScope
 class ArticleListRepository(private val articleApi: HomeAPI.Article) : DemoBaseRepository() {
 
     fun requestArticleList(
-        scope: CoroutineScope,
         pageId: Int,
         successBlock: (ArticleResult?) -> Unit
     ) {
-        launch(scope,
+        launch(
             block = {
                 articleApi.getArticleList(pageId).build()
             },
