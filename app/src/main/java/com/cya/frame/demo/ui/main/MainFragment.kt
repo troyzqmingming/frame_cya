@@ -1,5 +1,6 @@
 package com.cya.frame.demo.ui.main
 
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.cya.frame.demo.R
 import com.cya.frame.demo.base.DemoBaseFragment
@@ -7,6 +8,7 @@ import com.cya.frame.demo.databinding.FragmentMainBinding
 import com.cya.frame.demo.ui.article.ArticleListFragment
 import com.cya.frame.demo.ui.mine.MineFragment
 import com.cya.frame.ext.listener.setDefaultAdapter
+import com.cya.frame.ext.visible
 
 class MainFragment : DemoBaseFragment<FragmentMainBinding>() {
 

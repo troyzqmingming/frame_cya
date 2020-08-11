@@ -15,7 +15,8 @@ class ArticleDetailFragment : DemoBaseFragment<FragmentArticleDetailBinding>() {
 
     override fun initView() {
         binding.refreshLayout.setOnRefreshListener {
-            binding.webview.loadUrl("https://www.autohome.com.cn/drive/202007/1009303.html#pvareaid=3311301")
+//            binding.webview.loadUrl("https://www.autohome.com.cn/drive/202007/1009303.html#pvareaid=3311301")
+            binding.webview.loadUrl("https://www.baidu.com")
         }
         binding.webview.iCallback = object : DemoWebView.ICallback {
             override fun loadPageFinish() {

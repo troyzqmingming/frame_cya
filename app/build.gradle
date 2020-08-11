@@ -2,6 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+def appConfig = new Properties()
+file("../config.properties").withInputStream { appConfig.load(it) }
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -16,7 +19,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName appConfig.appVersionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -25,6 +28,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BASE_URL", "\"${appConfig.BASE_URL}\"")
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BASE_URL", "\"${appConfig.BASE_URL_TEST}\"")
         }
     }
 
@@ -77,8 +86,8 @@ dependencies {
     //download
     implementation "com.github.ssseasonnn.RxDownload:rxdownload4:1.0.9"
 
-    implementation project(":frame")
-//    implementation 'com.lib:cya_frame:1.0.3'
+//    implementation project(":frame")
+    implementation 'com.lib:cya_frame:1.0.4'
 
     implementation "android.arch.navigation:navigation-fragment-ktx:2.3.0-alpha01"
     implementation "android.arch.navigation:navigation-ui-ktx:2.3.0-alpha01"

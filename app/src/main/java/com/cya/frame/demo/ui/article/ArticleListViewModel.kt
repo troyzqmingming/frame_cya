@@ -17,7 +17,9 @@ class ArticleListViewModel(repository: ArticleListRepository) :
     fun loadArticle(isRefresh: Boolean = true) = getArticleList(isRefresh)
 
     private fun getArticleList(isRefresh: Boolean) {
-        repository.requestArticleList(curPageId) {
+        launch({
+            repository.requestArticleList(curPageId)
+        }, success = {
             (isRefresh).yes {
                 curPageId = 0
                 curPageId
@@ -25,7 +27,8 @@ class ArticleListViewModel(repository: ArticleListRepository) :
                 ++curPageId
             }
             articleListLiveData.postValue(it)
-        }
+        })
+
     }
 
 }

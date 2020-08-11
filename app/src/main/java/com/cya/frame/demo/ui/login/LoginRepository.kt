@@ -4,9 +4,7 @@ import com.cya.frame.demo.base.vm.DemoBaseRepository
 import com.cya.frame.demo.bean.result.UserResult
 import com.cya.frame.demo.di.Config
 import com.cya.frame.demo.ext.clearUserCache
-import com.cya.frame.demo.ext.saveUserCache
 import com.cya.frame.demo.service.api.LoginAPI
-import com.cya.frame.exception.CyaException
 
 class LoginRepository(private val loginApi: LoginAPI) : DemoBaseRepository() {
 
@@ -15,50 +13,24 @@ class LoginRepository(private val loginApi: LoginAPI) : DemoBaseRepository() {
         action?.invoke()
     }
 
-    fun requestRegisterWanAndroid(
+    suspend fun requestRegisterWanAndroid(
         username: String,
-        password: String,
-        successBlock: (UserResult?) -> Unit,
-        error: (CyaException) -> Unit
-    ) {
-        launch(
-            block = {
-                val mutableMap = mutableMapOf<String, Any?>()
-                mutableMap["username"] = username
-                mutableMap["password"] = password
-                mutableMap["repassword"] = password
-                loginApi.registerWanAndroid(mutableMap).build()
-            },
-            success = {
-                successBlock.invoke(it)
-                Config.Account.saveUserCache(it)
-            },
-            error = {
-                error(it)
-            }
-
-        )
+        password: String
+    ): UserResult? {
+        val mutableMap = mutableMapOf<String, Any?>()
+        mutableMap["username"] = username
+        mutableMap["password"] = password
+        mutableMap["repassword"] = password
+        return loginApi.registerWanAndroid(mutableMap).build()
     }
 
-    fun requestLoginWanAndroid(
+    suspend fun requestLoginWanAndroid(
         username: String,
-        password: String,
-        successBlock: (UserResult?) -> Unit,
-        error: (CyaException) -> Unit
-    ) {
-        launch(
-            block = {
-                val mutableMap = mutableMapOf<String, Any?>()
-                mutableMap["username"] = username
-                mutableMap["password"] = password
-                loginApi.loginWanAndroid(mutableMap).build()
-            },
-            success = {
-                successBlock.invoke(it)
-                Config.Account.saveUserCache(it)
-            },
-            error = {
-                error(it)
-            })
+        password: String
+    ): UserResult? {
+        val mutableMap = mutableMapOf<String, Any?>()
+        mutableMap["username"] = username
+        mutableMap["password"] = password
+        return loginApi.loginWanAndroid(mutableMap).build()
     }
 }
