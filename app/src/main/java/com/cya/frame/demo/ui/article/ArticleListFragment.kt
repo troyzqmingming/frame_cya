@@ -5,6 +5,7 @@ import com.cya.frame.demo.R
 import com.cya.frame.demo.base.DemoBaseMVVMFragment
 import com.cya.frame.demo.databinding.FragmentArticleListBinding
 import com.cya.frame.demo.ext.nav
+import com.cya.frame.demo.ui.main.MainFragmentDirections
 import com.cya.frame.ext.otherwise
 import com.cya.frame.ext.yes
 import org.koin.android.viewmodel.ext.android.getViewModel
@@ -45,7 +46,7 @@ class ArticleListFragment :
         }
         articleAdapter.run {
             setOnItemClickListener { adapter, view, position ->
-                nav(R.id.action_mainFragment_to_articleDetailFragment)
+                nav(MainFragmentDirections.actionMainFragmentToArticleDetailFragment("http://www.baidu.com"))
             }
         }
         binding.refreshLayout.run {

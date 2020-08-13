@@ -28,7 +28,18 @@
         android:id="@+id/articleDetailFragment"
         android:name="com.cya.frame.demo.ui.article.detail.ArticleDetailFragment"
         android:label="ArticleDetailFragment"
-        tools:layout="@layout/fragment_article_detail" />
+        tools:layout="@layout/fragment_article_detail" >
+        <argument
+            android:name="url"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_articleDetailFragment_self"
+            app:destination="@id/articleDetailFragment" />
+        <argument
+            android:name="isShowMore"
+            app:argType="boolean"
+            android:defaultValue="true" />
+    </fragment>
 
 
 </navigation>

@@ -11,8 +11,19 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_more"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="More" />
+            <Button
+                android:id="@+id/btn_close_all"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="closeAll" />
 
             <com.cya.frame.demo.view.DemoWebView
                 android:id="@+id/webview"
