@@ -1,6 +1,7 @@
 package com.cya.frame.retrofit
 
 import com.cya.frame.BuildConfig
+import com.cya.frame.isLoggerAble
 import com.ihsanbal.logging.Level
 import com.ihsanbal.logging.LoggingInterceptor
 import okhttp3.OkHttpClient
@@ -28,7 +29,7 @@ abstract class BaseRetrofitClient {
 
     private fun getDefaultLogger(): LoggingInterceptor {
         return LoggingInterceptor.Builder()
-            .loggable(BuildConfig.DEBUG)
+            .loggable(isLoggerAble)
             .setLevel(Level.BASIC)
             .log(Platform.INFO)
             .request("Request")

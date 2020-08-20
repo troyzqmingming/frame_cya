@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/mainFragment"
+    tools:ignore="UnusedNavigation">
 
 
     <fragment
@@ -13,11 +14,14 @@
         tools:layout="@layout/fragment_main">
 
         <action
-            android:id="@+id/action_mainFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-        <action
             android:id="@+id/action_mainFragment_to_articleDetailFragment"
             app:destination="@id/articleDetailFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_testDetailFragment"
+            app:destination="@id/testDetailFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_testDetailActivity"
+            app:destination="@id/testDetailActivity" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -28,7 +32,7 @@
         android:id="@+id/articleDetailFragment"
         android:name="com.cya.frame.demo.ui.article.detail.ArticleDetailFragment"
         android:label="ArticleDetailFragment"
-        tools:layout="@layout/fragment_article_detail" >
+        tools:layout="@layout/fragment_article_detail">
         <argument
             android:name="url"
             app:argType="string" />
@@ -37,9 +41,38 @@
             app:destination="@id/articleDetailFragment" />
         <argument
             android:name="isShowMore"
-            app:argType="boolean"
-            android:defaultValue="true" />
+            android:defaultValue="true"
+            app:argType="boolean" />
+        <argument
+            android:name="title"
+            android:defaultValue=" "
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
+    <action
+        android:id="@+id/action_global_loginFragment"
+        app:destination="@id/loginFragment"
+        app:enterAnim="@anim/anim_ui_enter"
+        app:exitAnim="@anim/anim_ui_bg_exit"
+        app:popEnterAnim="@anim/anim_ui_bg_enter"
+        app:popExitAnim="@anim/anim_ui_exit" />
+    <fragment
+        android:id="@+id/testDetailFragment"
+        android:name="com.cya.frame.demo.ui.test.TestDetailFragment"
+        android:label="TestDetailFragment"
+        tools:layout="@layout/fragment_test_detail">
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="image"
+            app:argType="integer" />
+    </fragment>
+    <activity
+        android:id="@+id/testDetailActivity"
+        android:name="com.cya.frame.demo.ui.test.TestDetailActivity"
+        android:label="TestDetailActivity"
+        tools:layout="@layout/activity_test_detail" />
 
 
 </navigation>

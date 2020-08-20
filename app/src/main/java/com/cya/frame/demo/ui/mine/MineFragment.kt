@@ -2,6 +2,7 @@ package com.cya.frame.demo.ui.mine
 
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.cya.frame.demo.NavGraphDirections
 import com.cya.frame.demo.R
 import com.cya.frame.demo.base.DemoBaseMVVMFragment
 import com.cya.frame.demo.bean.result.UserResult
@@ -9,6 +10,7 @@ import com.cya.frame.demo.data.Contract
 import com.cya.frame.demo.databinding.FragmentMineBinding
 import com.cya.frame.demo.di.getUserInfo
 import com.cya.frame.demo.di.isLogin
+import com.cya.frame.demo.ext.nav
 import com.cya.frame.demo.view.Progress
 import com.cya.frame.ext.*
 import com.jeremyliao.liveeventbus.LiveEventBus
@@ -28,7 +30,7 @@ class MineFragment : DemoBaseMVVMFragment<FragmentMineBinding, MineViewModel>() 
         }
         setNoRepeatClick(binding.btnLogin, binding.btnLogout, binding.btnDownload) {
             when (it) {
-                binding.btnLogin -> findNavController().navigate(R.id.action_mainFragment_to_loginFragment)
+                binding.btnLogin -> nav(NavGraphDirections.actionGlobalLoginFragment())
                 binding.btnLogout -> vm.logoutUser()
 //                binding.btnDownload -> vm.downloadFile("https://www.nikon.com.cn/manual/D7000.pdf")
             }

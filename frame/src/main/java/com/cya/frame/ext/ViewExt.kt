@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.view.View
 import android.widget.ImageView
+import androidx.constraintlayout.widget.Group
 
 fun View.visible() {
     visibility = View.VISIBLE
@@ -64,6 +65,7 @@ fun createBitmapSafely(width: Int, height: Int, config: Bitmap.Config, retryCoun
  * @param onClick  事件响应
  */
 var lastTime = 0L
+
 fun View.clickNoRepeat(interval: Long = 400, onClick: (View) -> Unit) {
     setOnClickListener {
         val currentTime = System.currentTimeMillis()
@@ -82,6 +84,14 @@ fun setNoRepeatClick(vararg views: View, interval: Long = 400, onClick: (View) -
     views.forEach {
         it.clickNoRepeat(interval = interval) { view ->
             onClick.invoke(view)
+        }
+    }
+}
+
+fun Group.allClick(click: (View) -> Unit) {
+    this.referencedIds.forEach {
+        rootView.findViewById<View>(it).setOnClickListener { view ->
+            click.invoke(view)
         }
     }
 }

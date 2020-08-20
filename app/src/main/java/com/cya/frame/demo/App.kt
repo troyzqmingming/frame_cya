@@ -16,7 +16,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         context = applicationContext
-        CyaSDK.initApplication()
+        CyaSDK.initApplication(isLogger = true)
         startKoin {
             androidContext(this@App)
             modules(appModule)

@@ -7,6 +7,7 @@ import com.cya.frame.demo.base.DemoBaseFragment
 import com.cya.frame.demo.databinding.FragmentMainBinding
 import com.cya.frame.demo.ui.article.ArticleListFragment
 import com.cya.frame.demo.ui.mine.MineFragment
+import com.cya.frame.demo.ui.test.TestFragment
 import com.cya.frame.ext.listener.setDefaultAdapter
 import com.cya.frame.ext.visible
 
@@ -19,12 +20,17 @@ class MainFragment : DemoBaseFragment<FragmentMainBinding>() {
         MineFragment()
     }
 
+    private val testFragment by lazy {
+        TestFragment()
+    }
+
     private val fragmentList = mutableListOf<Fragment>()
 
     init {
         fragmentList.run {
             add(homeFragment)
             add(personalFragment)
+            add(testFragment)
         }
     }
 
@@ -40,6 +46,7 @@ class MainFragment : DemoBaseFragment<FragmentMainBinding>() {
                 when (it) {
                     0 -> binding.navigationView.selectedItemId = R.id.articleListFragment
                     1 -> binding.navigationView.selectedItemId = R.id.mineFragment
+                    2 -> binding.navigationView.selectedItemId = R.id.testFragment
                 }
             }
         }
@@ -50,6 +57,9 @@ class MainFragment : DemoBaseFragment<FragmentMainBinding>() {
                 }
                 R.id.mineFragment -> {
                     binding.viewpager.currentItem = 1
+                }
+                R.id.testFragment -> {
+                    binding.viewpager.currentItem = 2
                 }
             }
             true
