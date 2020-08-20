@@ -1,5 +1,10 @@
 package com.cya.frame.demo.ui.article
 
+import android.os.Build
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.annotation.RequiresApi
+import androidx.core.view.doOnPreDraw
 import androidx.lifecycle.Observer
 import com.cya.frame.demo.R
 import com.cya.frame.demo.base.DemoBaseMVVMFragment
@@ -8,6 +13,8 @@ import com.cya.frame.demo.ext.nav
 import com.cya.frame.demo.ui.main.MainFragmentDirections
 import com.cya.frame.ext.otherwise
 import com.cya.frame.ext.yes
+import com.cya.frame.navigation.FragmentNavigator
+import com.cya.frame.navigation.FragmentNavigatorExtras
 import org.koin.android.viewmodel.ext.android.getViewModel
 
 class ArticleListFragment :
@@ -39,6 +46,7 @@ class ArticleListFragment :
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun initView() {
         binding.recyclerView.run {
             layoutManager = articleAdapter.getLayoutManager()
@@ -46,7 +54,18 @@ class ArticleListFragment :
         }
         articleAdapter.run {
             setOnItemClickListener { adapter, view, position ->
-                nav(MainFragmentDirections.actionMainFragmentToArticleDetailFragment("http://www.baidu.com"))
+                val tvTitle = view.findViewById<TextView>(R.id.tv_msg)
+                val ivImage = view.findViewById<ImageView>(R.id.iv_image)
+                nav(
+                    MainFragmentDirections.actionMainFragmentToArticleDetailFragment(
+                        url = this.data[position].link,
+                        title = this.data[position].title,
+                        bgColor = this.data[position].bgColor
+                    ), FragmentNavigatorExtras(
+                        tvTitle to tvTitle.transitionName,
+                        ivImage to ivImage.transitionName
+                    )
+                )
             }
         }
         binding.refreshLayout.run {
