@@ -58,6 +58,23 @@
 
                 </com.cya.frame.demo.view.DemoWebView>
 
+                <Space
+                    android:id="@+id/sp_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dp_25"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_image"
+                    app:layout_constraintEnd_toEndOf="@id/iv_image" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/floatingActionButton"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="@dimen/dp_50"
+                    android:layout_marginEnd="@dimen/dp_25"
+                    app:layout_constraintEnd_toEndOf="@+id/sp_iv"
+                    app:layout_constraintTop_toBottomOf="@id/sp_iv"
+                    android:src="@drawable/ic_add_white_18dp" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
@@ -65,13 +82,5 @@
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="@dimen/dp_20"
-        android:layout_marginBottom="@dimen/dp_50"
-        app:srcCompat="@android:drawable/ic_input_add" />
+
 </RelativeLayout>

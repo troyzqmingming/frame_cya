@@ -1,44 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/ll_part_user_info"
-        android:layout_width="match_parent"
+
+    <ImageView
+        android:id="@+id/iv_user_avatar"
+        android:layout_width="@dimen/dp_75"
+        android:layout_height="@dimen/dp_75"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_25"
+        android:src="@drawable/ic_supervised_user_circle_black_24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_username"
+        style="@style/nor_title_style"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/dp_10"
+        android:gravity="start|center_vertical"
+        android:text="请登录"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_user_avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_user_avatar"
+        app:layout_constraintTop_toTopOf="@id/iv_user_avatar" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/g_user_layout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="15dp">
+        app:constraint_referenced_ids="iv_user_avatar,tv_username" />
 
-        <TextView
-            android:id="@+id/tv_user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="username" />
-        <Button
-            android:id="@+id/btn_logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Logout" />
-
-        <Button
-            android:id="@+id/btn_download"
-            android:layout_width="wrap_content"
-            android:text="download"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_part_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="@dimen/dp_button"
-            android:layout_height="wrap_content"
-            android:text="Login" />
-    </LinearLayout>
-</LinearLayout>
+    <TextView
+        android:id="@+id/tv_logout"
+        style="@style/nor_title_style"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_50"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/dp_20"
+        android:text="退出登录"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_user_avatar"
+        tools:visibility="visible" />
+</androidx.constraintlayout.widget.ConstraintLayout>

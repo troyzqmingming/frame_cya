@@ -1,9 +1,7 @@
 package com.cya.frame.demo.ui.mine
 
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import com.cya.frame.demo.NavGraphDirections
-import com.cya.frame.demo.R
 import com.cya.frame.demo.base.DemoBaseMVVMFragment
 import com.cya.frame.demo.bean.result.UserResult
 import com.cya.frame.demo.data.Contract
@@ -28,12 +26,15 @@ class MineFragment : DemoBaseMVVMFragment<FragmentMineBinding, MineViewModel>() 
         activity?.let {
             progress = Progress(it).setMsg("加载中").isCancelable(false)
         }
-        setNoRepeatClick(binding.btnLogin, binding.btnLogout, binding.btnDownload) {
-            when (it) {
-                binding.btnLogin -> nav(NavGraphDirections.actionGlobalLoginFragment())
-                binding.btnLogout -> vm.logoutUser()
-//                binding.btnDownload -> vm.downloadFile("https://www.nikon.com.cn/manual/D7000.pdf")
+        binding.gUserLayout.allClick {
+            isLogin().yes {
+                toast("您已登录")
+            }.otherwise {
+                nav(NavGraphDirections.actionGlobalLoginFragment())
             }
+        }
+        binding.tvLogout.clickNoRepeat {
+            vm.logoutUser()
         }
     }
 
@@ -56,32 +57,15 @@ class MineFragment : DemoBaseMVVMFragment<FragmentMineBinding, MineViewModel>() 
             .observe(this, Observer {
                 setUserView(false, null)
             })
-//        vm.getObservable(Loading::class.java).observe(viewLifecycleOwner, Observer {
-//            when (it.state) {
-//                State.LOADING_SHOW -> {
-//                    activity?.let { act ->
-//                        progress?.setMsg(it.msg)
-//                        progress?.show(act)
-//                    }
-//                }
-//                State.LOADING_HIDE -> {
-//                    activity?.let { act ->
-//                        progress?.dismiss(act)
-//                    }
-//                }
-//            }
-//
-//        })
     }
 
     private fun setUserView(isLogin: Boolean = false, userResult: UserResult?) {
-        isLogin.yes {
-            binding.llPartLogin.gone()
-            binding.llPartUserInfo.visible()
-            binding.tvUserName.text = userResult?.nickname
+        binding.tvUsername.text = isLogin.yes {
+            binding.tvLogout.visible()
+            userResult?.nickname
         }.otherwise {
-            binding.llPartLogin.visible()
-            binding.llPartUserInfo.gone()
+            binding.tvLogout.gone()
+            "请登录"
         }
     }
 }
