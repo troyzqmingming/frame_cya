@@ -15,7 +15,11 @@
 
         <action
             android:id="@+id/action_mainFragment_to_articleDetailFragment"
-            app:destination="@id/articleDetailFragment" />
+            app:destination="@id/articleDetailFragment"
+            app:enterAnim="@anim/anim_ui_enter"
+            app:exitAnim="@anim/anim_ui_bg_exit"
+            app:popEnterAnim="@anim/anim_ui_bg_enter"
+            app:popExitAnim="@anim/anim_ui_exit" />
         <action
             android:id="@+id/action_mainFragment_to_testDetailFragment"
             app:destination="@id/testDetailFragment" />
@@ -50,7 +54,11 @@
             app:argType="boolean" />
         <action
             android:id="@+id/action_articleDetailFragment_self"
-            app:destination="@id/articleDetailFragment" />
+            app:destination="@id/articleDetailFragment"
+            app:enterAnim="@anim/anim_ui_enter"
+            app:exitAnim="@anim/anim_ui_bg_exit"
+            app:popEnterAnim="@anim/anim_ui_bg_enter"
+            app:popExitAnim="@anim/anim_ui_exit" />
     </fragment>
     <action
         android:id="@+id/action_global_loginFragment"

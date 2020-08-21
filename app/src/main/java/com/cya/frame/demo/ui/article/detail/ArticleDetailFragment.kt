@@ -4,16 +4,17 @@ import android.os.Build
 import android.view.KeyEvent
 import androidx.activity.addCallback
 import androidx.annotation.RequiresApi
+import androidx.core.view.ViewCompat
 import androidx.navigation.fragment.navArgs
 import androidx.transition.TransitionInflater
 import com.cya.frame.demo.R
 import com.cya.frame.demo.base.DemoBaseFragment
 import com.cya.frame.demo.databinding.FragmentArticleDetailBinding
+import com.cya.frame.demo.ext.back2Main
 import com.cya.frame.demo.ext.finish
 import com.cya.frame.demo.ext.nav
 import com.cya.frame.demo.view.DemoWebView
-import com.cya.frame.ext.toast
-import com.cya.frame.ext.yes
+import com.cya.frame.ext.*
 
 class ArticleDetailFragment : DemoBaseFragment<FragmentArticleDetailBinding>() {
 
@@ -29,17 +30,19 @@ class ArticleDetailFragment : DemoBaseFragment<FragmentArticleDetailBinding>() {
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun initView() {
+        super.initView()
+        sharedElementEnterTransition = android.transition.TransitionInflater.from(context).inflateTransition(android.R.transition.move)
         args.apply {
+            binding.toolbarLayout.setTitleText(title)
             binding.ivImage.setBackgroundColor(bgColor)
-            binding.ivImage.transitionName =
-                "${title}${mContext.getString(R.string.share_element_detail_image)}"
             binding.tvTitle.text = title
-            binding.tvTitle.transitionName =
-                "${title}${getString(R.string.share_element_detail_title)}"
-        }
-        TransitionInflater.from(mContext).inflateTransition(R.transition.transition).apply {
-            sharedElementEnterTransition = this
-            sharedElementReturnTransition = this
+            isFirstPage.no {
+                binding.toolbarLayout.setCloseClickListener {
+                    back2Main()
+                }
+            }
+            ViewCompat.setTransitionName(binding.ivImage , "${title}${mContext.getString(R.string.share_element_detail_image)}")
+            ViewCompat.setTransitionName(binding.tvTitle , "${title}${getString(R.string.share_element_detail_title)}")
         }
         binding.refreshLayout.setOnRefreshListener {
             binding.webview.loadUrl(args.url)
@@ -49,6 +52,16 @@ class ArticleDetailFragment : DemoBaseFragment<FragmentArticleDetailBinding>() {
             override fun loadPageFinish() {
                 binding.refreshLayout.finishRefresh()
             }
+        }
+        binding.floatingActionButton.clickNoRepeat {
+            nav(
+                ArticleDetailFragmentDirections.actionArticleDetailFragmentSelf(
+                    "http://www.baidu.com",
+                    "BaiDu",
+                    randomColor(),
+                    false
+                )
+            )
         }
     }
 }

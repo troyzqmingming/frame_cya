@@ -41,6 +41,7 @@ class LoginFragment : DemoBaseMVVMFragment<FragmentLoginBinding, LoginViewModel>
     }
 
     override fun initView() {
+        super.initView()
         binding.btnLogin.setOnClickListener {
             vm.loginWanAndroid(
                 binding.etPhone.text.toString().trim(),
