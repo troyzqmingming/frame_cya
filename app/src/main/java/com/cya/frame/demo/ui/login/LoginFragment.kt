@@ -40,7 +40,7 @@ class LoginFragment : DemoBaseMVVMFragment<FragmentLoginBinding, LoginViewModel>
 
     override fun initView() {
         super.initView()
-        binding.demoToolbar.setTitleText("登录")
+        binding.layoutTitle.toolbar.setTitleText("登录")
         setNoRepeatClick(binding.btnLogin, binding.tvRegister) {
             when (it) {
                 binding.btnLogin ->

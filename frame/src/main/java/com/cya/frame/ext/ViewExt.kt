@@ -88,9 +88,9 @@ fun setNoRepeatClick(vararg views: View, interval: Long = 400, onClick: (View) -
     }
 }
 
-fun Group.allClick(click: (View) -> Unit) {
+fun Group.allClick(interval: Long = 400, click: (View) -> Unit) {
     this.referencedIds.forEach {
-        rootView.findViewById<View>(it).setOnClickListener { view ->
+        rootView.findViewById<View>(it).clickNoRepeat(interval = interval) { view ->
             click.invoke(view)
         }
     }
