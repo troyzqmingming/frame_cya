@@ -91,7 +91,7 @@ dependencies {
     //koin
     implementation "org.koin:koin-android-viewmodel:2.1.5"
     //permission
-    implementation 'com.afollestad.assent:core:3.0.0-RC4'
+    implementation 'com.yanzhenjie:permission:2.0.3'
     //download
     implementation "com.github.ssseasonnn.RxDownload:rxdownload4:1.0.9"
 

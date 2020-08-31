@@ -75,6 +75,9 @@ dependencies {
     //recyclerAdapter
     api rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 }
 
 //推荐放在module的gradle依赖文件的最后面

@@ -26,6 +26,7 @@ allprojects {
         maven {
             url "https://jitpack.io"
         }
+        maven { url 'https://maven.google.com' }
     }
     //防止生成javadoc报错
     tasks.withType(Javadoc) {

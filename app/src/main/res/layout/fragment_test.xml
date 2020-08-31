@@ -18,27 +18,51 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/ib_left"
+    <Button
+        android:id="@+id/btn_save_cache"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:src="@mipmap/ic_launcher"
+        android:text="保存缓存"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ib_right"
+        app:layout_constraintEnd_toStartOf="@+id/btn_get_cache"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageButton
-        android:id="@+id/ib_right"
+    <Button
+        android:id="@+id/btn_get_cache"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_10"
         android:src="@mipmap/ic_launcher_round"
+        android:text="读取缓存"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ib_left"
-        app:layout_constraintTop_toTopOf="@+id/ib_left" />
+        app:layout_constraintStart_toEndOf="@+id/btn_save_cache"
+        app:layout_constraintTop_toTopOf="@+id/btn_save_cache" />
 
-    <ImageButton
+    <Button
+        android:id="@+id/btn_save_local"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:src="@mipmap/ic_launcher_round"
+        android:text="保存本地"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_get_cache"
+        app:layout_constraintTop_toTopOf="@+id/btn_get_cache" />
+
+    <Button
+        android:id="@+id/btn_get_local"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:src="@mipmap/ic_launcher_round"
+        android:text="读取本地"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_save_local"
+        app:layout_constraintTop_toTopOf="@+id/btn_save_local" />
+
+    <ImageView
         android:id="@+id/ib_center"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -87,7 +111,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"
-        app:constraint_referenced_ids="ib_left,ib_right" />
+        app:constraint_referenced_ids="btn_save_cache,btn_get_cache" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier"
