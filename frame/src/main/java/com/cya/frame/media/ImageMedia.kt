@@ -19,8 +19,10 @@ import com.cya.frame.ext.yes
 import java.io.File
 import java.io.FileOutputStream
 
-
-object ImageUtils {
+/**
+ * 存储图片
+ */
+object ImageMedia {
 
     private val context = CyaSDK.getContext()
 
