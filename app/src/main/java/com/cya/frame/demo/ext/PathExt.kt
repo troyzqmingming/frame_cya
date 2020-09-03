@@ -1,4 +1,4 @@
-package com.cya.frame.demo.di
+package com.cya.frame.demo.ext
 
 import com.cya.frame.CyaSDK
 

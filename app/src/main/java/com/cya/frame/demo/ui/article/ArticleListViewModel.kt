@@ -17,15 +17,15 @@ class ArticleListViewModel(repository: ArticleListRepository) :
     fun loadArticle(isRefresh: Boolean = true) = getArticleList(isRefresh)
 
     private fun getArticleList(isRefresh: Boolean) {
+        (isRefresh).yes {
+            curPageId = 0
+            curPageId
+        }.otherwise {
+            ++curPageId
+        }
         launch({
             repository.requestArticleList(curPageId)
         }, success = {
-            (isRefresh).yes {
-                curPageId = 0
-                curPageId
-            }.otherwise {
-                ++curPageId
-            }
             articleListLiveData.postValue(it)
         })
 

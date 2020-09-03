@@ -1,7 +1,7 @@
 package com.cya.frame.demo.ext
 
 import com.cya.frame.demo.bean.result.UserResult
-import com.cya.frame.demo.di.Config
+import com.cya.frame.demo.config.Config
 import com.google.gson.Gson
 
 fun Config.Account.clearUserCache() {

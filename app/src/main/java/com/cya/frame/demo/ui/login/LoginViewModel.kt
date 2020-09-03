@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.cya.frame.demo.base.vm.DemoBaseViewModel
 import com.cya.frame.demo.bean.result.UserResult
 import com.cya.frame.demo.data.Contract
-import com.cya.frame.demo.di.Config
+import com.cya.frame.demo.config.Config
 import com.cya.frame.demo.ext.saveUserCache
 import com.jeremyliao.liveeventbus.LiveEventBus
 

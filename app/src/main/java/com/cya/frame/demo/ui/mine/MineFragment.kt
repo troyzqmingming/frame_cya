@@ -6,8 +6,8 @@ import com.cya.frame.demo.base.DemoBaseMVVMFragment
 import com.cya.frame.demo.bean.result.UserResult
 import com.cya.frame.demo.data.Contract
 import com.cya.frame.demo.databinding.FragmentMineBinding
-import com.cya.frame.demo.di.getUserInfo
-import com.cya.frame.demo.di.isLogin
+import com.cya.frame.demo.config.getUserInfo
+import com.cya.frame.demo.config.isLogin
 import com.cya.frame.demo.ext.nav
 import com.cya.frame.demo.view.Progress
 import com.cya.frame.ext.*

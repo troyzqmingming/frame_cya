@@ -10,7 +10,7 @@ import androidx.navigation.ActivityNavigator
 import com.cya.frame.demo.R
 import com.cya.frame.demo.base.DemoBaseFragment
 import com.cya.frame.demo.databinding.FragmentTestBinding
-import com.cya.frame.demo.di.FILE_PRIVATE_PATH_ROOT
+import com.cya.frame.demo.ext.FILE_PRIVATE_PATH_ROOT
 import com.cya.frame.demo.ext.nav
 import com.cya.frame.demo.ui.main.MainFragmentDirections
 import com.cya.frame.demo.view.Progress
@@ -58,7 +58,8 @@ class TestFragment : DemoBaseFragment<FragmentTestBinding>() {
             binding.btnSaveCache,
             binding.btnGetCache,
             binding.btnSaveLocal,
-            binding.btnGetLocal
+            binding.btnGetLocal,
+            binding.textView3
         ) {
             when (it) {
                 binding.btnSaveCache -> {
@@ -94,6 +95,9 @@ class TestFragment : DemoBaseFragment<FragmentTestBinding>() {
                                 binding.ibCenter.setImageBitmap(bitmap)
                             }
                         }.start()
+                }
+                binding.textView3 -> {
+
                 }
             }
         }

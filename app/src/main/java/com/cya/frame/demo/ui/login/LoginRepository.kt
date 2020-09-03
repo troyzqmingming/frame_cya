@@ -2,7 +2,7 @@ package com.cya.frame.demo.ui.login
 
 import com.cya.frame.demo.base.vm.DemoBaseRepository
 import com.cya.frame.demo.bean.result.UserResult
-import com.cya.frame.demo.di.Config
+import com.cya.frame.demo.config.Config
 import com.cya.frame.demo.ext.clearUserCache
 import com.cya.frame.demo.service.api.LoginAPI
 

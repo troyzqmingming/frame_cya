@@ -1,4 +1,4 @@
-package com.cya.frame.demo.di
+package com.cya.frame.demo.config
 
 import com.cya.frame.demo.ext.getUserCache
 

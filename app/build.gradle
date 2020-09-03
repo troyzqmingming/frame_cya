@@ -94,6 +94,8 @@ dependencies {
     implementation 'com.yanzhenjie:permission:2.0.3'
     //download
     implementation "com.github.ssseasonnn.RxDownload:rxdownload4:1.0.9"
+    //update
+    implementation "com.github.AlexLiuSheng:CheckVersionLib:2.4_androidx"
 
     implementation project(":frame")
 //    implementation 'com.lib:cya_frame:1.0.5'

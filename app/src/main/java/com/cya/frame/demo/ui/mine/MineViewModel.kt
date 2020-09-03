@@ -1,19 +1,9 @@
 package com.cya.frame.demo.ui.mine
 
-import com.cya.frame.base.vm.BaseViewModel
 import com.cya.frame.demo.base.vm.DemoBaseViewModel
 import com.cya.frame.demo.data.Contract
-import com.cya.frame.demo.di.FILE_PRIVATE_PATH_ROOT
-import com.cya.frame.demo.di.getFileNameFormUrl
 import com.cya.frame.demo.ui.login.LoginRepository
 import com.jeremyliao.liveeventbus.LiveEventBus
-import com.orhanobut.logger.Logger
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
-import zlc.season.rxdownload4.download
-import zlc.season.rxdownload4.task.Task
 
 class MineViewModel(repository: LoginRepository) :
     DemoBaseViewModel<LoginRepository>(repository) {
