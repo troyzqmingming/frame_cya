@@ -1,0 +1,57 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
+android {
+    compileSdkVersion rootProject.android.compileSdkVersion
+    buildToolsVersion rootProject.android.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.android.minSdkVersion
+        targetSdkVersion rootProject.android.targetSdkVersion
+        versionCode rootProject.android.versionCode
+        versionName rootProject.android.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    viewBinding {
+        enabled = true
+    }
+}
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation rootProject.ext.dependencies["annotation"]
+    compileOnly(rootProject.ext.dependencies["appcompat"])
+    compileOnly(rootProject.ext.dependencies["coreKtx"])
+    compileOnly(rootProject.ext.dependencies["constraintlayout"])
+    compileOnly(rootProject.ext.dependencies["recyclerview"])
+    compileOnly(rootProject.ext.dependencies["navigationFragment"])
+    compileOnly(rootProject.ext.dependencies["navigationUI"])
+    compileOnly(rootProject.ext.dependencies["coroutines"])
+    compileOnly(rootProject.ext.dependencies["coroutinesAndroid"])
+    compileOnly(rootProject.ext.dependencies["viewPager2"])
+    compileOnly(rootProject.ext.dependencies["checkUpdate"])
+    compileOnly(rootProject.ext.dependencies["lifecycleLiveData"])
+    compileOnly(rootProject.ext.dependencies["koinViewModel"])
+    compileOnly(rootProject.ext.dependencies["smartRefreshLayout"])
+    compileOnly project(":lib_base")
+    compileOnly project(":lib_ui")
+    compileOnly project(":lib_net")
+    compileOnly project(":module_user")
+}

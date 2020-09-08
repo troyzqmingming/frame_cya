@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<dimen name="dp_10">10.9600dp</dimen>
+	<dimen name="dp_50">54.8000dp</dimen>
+	<dimen name="dp_button">109.6000dp</dimen>
+	<dimen name="sp_12">13.1520sp</dimen>
+</resources>

@@ -1,0 +1,54 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion rootProject.android.compileSdkVersion
+    buildToolsVersion rootProject.android.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.cya.myapplication"
+        minSdkVersion rootProject.android.minSdkVersion
+        targetSdkVersion rootProject.android.targetSdkVersion
+        versionCode rootProject.android.versionCode
+        versionName rootProject.android.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation(rootProject.ext.dependencies["appcompat"])
+    implementation(rootProject.ext.dependencies["annotation"])
+    implementation(rootProject.ext.dependencies["coreKtx"])
+    implementation(rootProject.ext.dependencies["constraintlayout"])
+    implementation(rootProject.ext.dependencies["recyclerview"])
+    implementation(rootProject.ext.dependencies["navigationFragment"])
+    implementation(rootProject.ext.dependencies["navigationUI"])
+    implementation(rootProject.ext.dependencies["coroutines"])
+    implementation(rootProject.ext.dependencies["coroutinesAndroid"])
+    implementation(rootProject.ext.dependencies["viewPager2"])
+    implementation(rootProject.ext.dependencies["checkUpdate"])
+    implementation(rootProject.ext.dependencies["lifecycleLiveData"])
+    implementation(rootProject.ext.dependencies["koinViewModel"])
+    implementation(rootProject.ext.dependencies["smartRefreshLayout"])
+
+    implementation project(":lib_base")
+    implementation project(":lib_ui")
+    implementation project(":lib_net")
+    implementation project(":module_home")
+    implementation project(":module_user")
+}
