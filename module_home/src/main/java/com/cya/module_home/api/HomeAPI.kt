@@ -1,4 +1,4 @@
-package com.cya.module_home.retrofit.api
+package com.cya.module_home.api
 
 import com.cya.module_home.result.ArticleResult
 import com.cya.lib_base.bean.HttpBaseResponse

@@ -4,14 +4,11 @@ import androidx.lifecycle.Observer
 import com.cya.frame.ext.*
 import com.cya.lib_base.ext.nav
 import com.cya.lib_base.ui.CYABaseMVVMFragment
-import com.cya.module_home.NavGraphDirections
-import com.cya.module_home.R
 import com.cya.module_home.databinding.FragmentMineBinding
 import com.cya.module_user.config.UserConfig
 import com.cya.module_user.config.UserConfig.isLogin
 import com.cya.module_user.config.getUserCache
 import com.cya.module_user.data.UserContract
-import com.cya.module_user.login.LoginFragmentDirections
 import com.cya.module_user.result.UserResult
 import com.jeremyliao.liveeventbus.LiveEventBus
 import org.koin.android.viewmodel.ext.android.getViewModel
@@ -24,11 +21,11 @@ class MineFragment : CYABaseMVVMFragment<FragmentMineBinding, MineViewModel>() {
 
     override fun initView() {
         binding.gUserLayout.allClick {
-            isLogin.yes {
-                toast("您已登录")
-            }.otherwise {
-                nav(NavGraphDirections.actionGlobalLoginFragment())
-            }
+//            isLogin.yes {
+//                toast("您已登录")
+//            }.otherwise {
+//                nav(NavGraphDirections.actionGlobalLoginFragment())
+//            }
         }
         binding.tvLogout.clickNoRepeat {
             vm.logoutUser()

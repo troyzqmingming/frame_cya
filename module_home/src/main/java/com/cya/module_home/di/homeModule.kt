@@ -1,7 +1,7 @@
 package com.cya.module_home.di
 
-import com.cya.module_home.retrofit.api.HomeAPI
-import com.cya.module_home.retrofit.service.HomeArticleService
+import com.cya.module_home.api.HomeAPI
+import com.cya.module_home.api.HomeArticleService
 import com.cya.module_home.ui.article.ArticleListRepository
 import com.cya.module_home.ui.article.ArticleListViewModel
 import com.cya.module_home.ui.mine.MineViewModel

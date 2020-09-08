@@ -4,7 +4,6 @@ import androidx.fragment.app.Fragment
 import com.cya.module_home.ui.article.ArticleListFragment
 import com.cya.module_home.ui.mine.MineFragment
 import com.cya.frame.ext.listener.setDefaultAdapter
-import com.cya.lib_base.ui.CYABaseActivity
 import com.cya.lib_base.ui.CYABaseFragment
 import com.cya.module_home.R
 import com.cya.module_home.databinding.FragmentMainBinding
