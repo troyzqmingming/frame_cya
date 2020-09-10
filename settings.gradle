@@ -1,3 +1,4 @@
+include ':feature_article'
 include ':library_base'
 include ':library_ui'
 include ':feature_user'

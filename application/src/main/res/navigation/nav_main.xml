@@ -8,17 +8,14 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.cya.application.ui.HomeFragment"
-        tools:layout="@layout/fragment_home">
-        <action
-            android:id="@+id/action_homeFragment_to_articleDetailFragment"
-            app:destination="@id/articleDetailFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_home" />
 
-    <fragment
-        android:id="@+id/articleDetailFragment"
-        android:name="com.cya.application.ui.article.detail.ArticleDetailFragment"
+    <include-dynamic
+        android:id="@+id/includeArticle"
+        app:graphPackage="com.cya.application.feature_article"
+        app:graphResName="nav_article"
+        app:moduleName="feature_article"
         tools:layout="@layout/fragment_article_detail">
-
         <argument
             android:name="url"
             app:argType="string" />
@@ -34,15 +31,7 @@
             android:name="isFirstPage"
             android:defaultValue="true"
             app:argType="boolean" />
-        <action
-            android:id="@+id/action_articleDetailFragment_self"
-            app:destination="@id/articleDetailFragment"
-            app:enterAnim="@anim/anim_ui_enter"
-            app:exitAnim="@anim/anim_ui_bg_exit"
-            app:popEnterAnim="@anim/anim_ui_bg_enter"
-            app:popExitAnim="@anim/anim_ui_exit" />
-    </fragment>
-
+    </include-dynamic>
 
     <include-dynamic
         android:id="@+id/includeUser"
@@ -50,6 +39,7 @@
         app:graphResName="nav_user"
         app:moduleName="feature_user"
         tools:layout="@layout/fragment_login" />
+
     <action
         android:id="@+id/action_global_includeUser"
         app:destination="@id/includeUser"
@@ -57,14 +47,12 @@
         app:exitAnim="@anim/anim_ui_bg_exit"
         app:popEnterAnim="@anim/anim_ui_bg_enter"
         app:popExitAnim="@anim/anim_ui_exit" />
-
-    <fragment
-        android:id="@+id/personalFragment"
-        android:name="com.cya.application.feature_user.personal.PersonalFragment"
-        app:moduleName="feature_user"
-        tools:layout="@layout/fragment_personal" />
     <action
-        android:id="@+id/action_global_personalFragment"
-        app:destination="@id/personalFragment" />
+        android:id="@+id/action_global_includeArticle"
+        app:destination="@id/includeArticle"
+        app:enterAnim="@anim/anim_ui_enter"
+        app:exitAnim="@anim/anim_ui_bg_exit"
+        app:popEnterAnim="@anim/anim_ui_bg_enter"
+        app:popExitAnim="@anim/anim_ui_exit" />
 
 </navigation>

@@ -1,8 +1,8 @@
 package com.cya.application.feature_user.personal
 
+import androidx.activity.addCallback
 import com.cya.application.feature_user.databinding.FragmentPersonalBinding
 import com.cya.application.router.backHome
-import com.cya.frame.ext.clickNoRepeat
 import com.cya.library_base.ui.CYABaseFragment
 
 class PersonalFragment : CYABaseFragment<FragmentPersonalBinding>() {
@@ -11,8 +11,10 @@ class PersonalFragment : CYABaseFragment<FragmentPersonalBinding>() {
     }
 
     override fun initView() {
-        binding.tvMsg.clickNoRepeat {
-            backHome()
+        viewLifecycleOwner.apply {
+            requireActivity().onBackPressedDispatcher.addCallback {
+                backHome()
+            }
         }
     }
 

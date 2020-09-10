@@ -30,7 +30,7 @@ android {
     viewBinding {
         enabled = true
     }
-    dynamicFeatures = [':feature_user']
+    dynamicFeatures = [':feature_user', ':feature_article']
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {

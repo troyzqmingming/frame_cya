@@ -1,4 +1,4 @@
-package com.cya.application.ui.article.detail
+package com.cya.application.feature_article.detail
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -10,8 +10,6 @@ import androidx.navigation.fragment.navArgs
 import com.cya.application.R
 import com.cya.application.databinding.FragmentArticleDetailBinding
 import com.cya.application.router.backHome
-import com.cya.application.ui.article.ArticleDetailFragmentArgs
-import com.cya.application.ui.article.ArticleDetailFragmentDirections
 import com.cya.frame.ext.no
 import com.cya.library_base.ui.CYABaseFragment
 import com.cya.library_ui.webview.CYAWebView
@@ -59,7 +57,7 @@ class ArticleDetailFragment : CYABaseFragment<FragmentArticleDetailBinding>() {
         }
         binding.floatingActionButton.clickNoRepeat {
             nav(
-                ArticleDetailFragmentDirections.actionArticleDetailFragmentSelf(
+                ArticleDetailFragmentDirections.actionArticleDetailFragmentSelf2(
                     "http://www.baidu.com",
                     "BaiDu",
                     randomColor(),

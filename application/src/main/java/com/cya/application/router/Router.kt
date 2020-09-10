@@ -20,9 +20,6 @@ fun Fragment.navLogin() {
     nav(MainDirections.actionGlobalIncludeUser())
 }
 
-fun Fragment.navPersonal() {
-    nav(MainDirections.actionGlobalPersonalFragment())
-}
 
 /**
  * 返回主界面

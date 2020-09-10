@@ -49,7 +49,7 @@ class ArticleListFragment :
         articleAdapter.run {
             setOnItemClickListener { adapter, view, position ->
                 nav(
-                    HomeFragmentDirections.actionHomeFragmentToArticleDetailFragment(
+                    HomeFragmentDirections.actionGlobalIncludeArticle(
                         url = this.data[position].link,
                         title = this.data[position].title,
                         bgColor = this.data[position].bgColor
