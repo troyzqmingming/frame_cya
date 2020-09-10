@@ -11,15 +11,15 @@ import org.koin.dsl.module
 
 class UserModule : IModule {
 
-    val userViewModule = module {
+    private val userViewModule = module {
         viewModel { LoginViewModel(get()) }
     }
 
-    val userRespModule = module {
+    private val userRespModule = module {
         single { LoginRepository(get()) }
     }
 
-    val userApiModule = module {
+    private val userApiModule = module {
         single<UserAPI> {
             UserService
         }

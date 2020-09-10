@@ -1,10 +1,12 @@
 package com.cya.application.feature_user.login
 
 import androidx.lifecycle.Observer
+import com.cya.application.feature_user.R
 import com.cya.application.feature_user.databinding.FragmentLoginBinding
 import com.cya.frame.ext.setNoRepeatClick
 import com.cya.frame.ext.toast
 import com.cya.library_base.ext.finish
+import com.cya.library_base.ext.nav
 import com.cya.library_base.ui.CYABaseMVVMFragment
 import com.cya.library_ui.progress.ProgressUtil
 import org.koin.android.viewmodel.ext.android.getViewModel
@@ -23,7 +25,8 @@ class LoginFragment : CYABaseMVVMFragment<FragmentLoginBinding, LoginViewModel>(
         vm.apply {
             loginLiveData.observe(this@LoginFragment, Observer {
                 toast("登录成功")
-                finish()
+                nav(R.id.action_global_personalFragment)
+//                finish()
             })
         }
     }

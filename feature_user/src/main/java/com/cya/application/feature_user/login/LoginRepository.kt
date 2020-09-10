@@ -1,6 +1,6 @@
 package com.cya.application.feature_user.login
 
-import com.cya.application.feature_user.result.UserResult
+import com.cya.application.feature_user.bean.UserResult
 import com.cya.application.feature_user.config.clearUserCache
 import com.cya.library_base.vm.CYABaseRepository
 import com.cya.application.feature_user.api.UserAPI

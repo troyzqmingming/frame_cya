@@ -8,7 +8,8 @@ import org.koin.core.module.Module
  * module的di类路径
  */
 internal val moduleClassPathArr = arrayOf(
-    "com.cya.application.feature_user.di.UserModule"
+    "com.cya.application.feature_user.di.UserModule",
+    "com.cya.application.di.HomeModule"
 )
 
 /**

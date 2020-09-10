@@ -1,0 +1,7 @@
+<resources>
+
+    <string name="share_element_test_title">share_ele_test_title</string>
+    <string name="share_element_test_image">share_ele_test_image</string>
+    <string name="share_element_detail_title">share_ele_detail_title</string>
+    <string name="share_element_detail_image">share_ele_detail_image</string>
+</resources>

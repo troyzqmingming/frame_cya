@@ -1,6 +1,6 @@
 package com.cya.application.feature_user.api
 
-import com.cya.application.feature_user.result.UserResult
+import com.cya.application.feature_user.bean.UserResult
 import com.cya.library_base.bean.response.HttpBaseResponse
 import com.cya.library_base.constant.url.BaseUrl
 import com.cya.library_base.net.retorfit.RetrofitClient

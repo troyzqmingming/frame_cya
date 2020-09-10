@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/articleListFragment"
+        android:icon="@drawable/ic_home_24dp"
+        android:title="Home" />
+    <item
+        android:id="@+id/mineFragment"
+        android:icon="@drawable/ic_home_mine_24dp"
+        android:title="Mine" />
+    <item
+        android:id="@+id/testFragment"
+        android:icon="@mipmap/ic_launcher_round"
+        android:title="3" />
+    <item
+        android:icon="@mipmap/ic_launcher_round"
+        android:title="4" />
+    <item
+        android:icon="@mipmap/ic_launcher_round"
+        android:title="5" />
+
+</menu>

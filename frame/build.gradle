@@ -56,6 +56,7 @@ dependencies {
     implementation rootProject.ext.dependencies["viewPager2"]
     implementation rootProject.ext.dependencies["navigationFragment"]
     implementation rootProject.ext.dependencies["navigationUI"]
+    implementation rootProject.ext.dependencies["navigationDynamic"]
     //协程
     implementation rootProject.ext.dependencies["coroutines"]
     implementation rootProject.ext.dependencies["coroutinesAndroid"]

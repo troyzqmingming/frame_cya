@@ -1,4 +1,4 @@
-package com.cya.application.feature_user.result
+package com.cya.application.feature_user.bean
 
 import com.google.gson.annotations.SerializedName
 

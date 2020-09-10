@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.cya.application.feature_user.login.LoginFragment"
+        tools:layout="@layout/fragment_login" />
+
+    <fragment
+        android:id="@+id/personalFragment"
+        android:name="com.cya.application.feature_user.personal.PersonalFragment"
+        tools:layout="@layout/fragment_personal" />
+    <action
+        android:id="@+id/action_global_loginFragment2"
+        app:destination="@id/loginFragment"
+        app:enterAnim="@anim/anim_ui_enter"
+        app:exitAnim="@anim/anim_ui_bg_exit"
+        app:popEnterAnim="@anim/anim_ui_bg_enter"
+        app:popExitAnim="@anim/anim_ui_exit" />
+    <action
+        android:id="@+id/action_global_personalFragment"
+        app:destination="@id/personalFragment"
+        app:enterAnim="@anim/anim_ui_enter"
+        app:exitAnim="@anim/anim_ui_bg_exit"
+        app:popEnterAnim="@anim/anim_ui_bg_enter"
+        app:popExitAnim="@anim/anim_ui_exit" />
+
+
+</navigation>

@@ -1,7 +1,7 @@
 package com.cya.application.feature_user.login
 
 import androidx.lifecycle.MutableLiveData
-import com.cya.application.feature_user.result.UserResult
+import com.cya.application.feature_user.bean.UserResult
 import com.cya.application.feature_user.config.saveUserCache
 import com.cya.application.feature_user.contract.UserKeys
 import com.cya.library_base.vm.CYABaseViewModel
