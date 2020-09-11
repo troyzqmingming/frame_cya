@@ -1,5 +1,6 @@
-package com.cya.wan_android.bean
+package com.cya.wan_android.entity
 
+import com.cya.frame.base.Results
 import com.cya.frame.exception.CyaException
 import com.google.gson.annotations.SerializedName
 
@@ -14,13 +15,13 @@ data class HttpBaseResponse<T>(
     @SerializedName("data")
     var data: T? = null
 ) {
-    fun build(): T? {
-        when (errorCode) {
+    fun build(): Results<HttpBaseResponse<T>> {
+        return when (errorCode) {
             0 -> {
-                return data
+                Results.success(this)
             }
             else -> {
-                throw CyaException(errorCode, errorMsg)
+                Results.failure(CyaException(errorCode, errorMsg))
             }
         }
     }

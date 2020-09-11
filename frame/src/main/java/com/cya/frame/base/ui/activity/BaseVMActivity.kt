@@ -1,4 +1,4 @@
-package com.cya.frame.base.ui
+package com.cya.frame.base.ui.activity
 
 import android.os.Bundle
 import androidx.viewbinding.ViewBinding
@@ -7,7 +7,7 @@ import com.cya.frame.base.vm.BaseViewModel
 /**
  * @author
  */
-abstract class BaseMVVMActivity<V : ViewBinding, VM : BaseViewModel<*>> : BaseActivity<V>() {
+abstract class BaseVMActivity<V : ViewBinding, VM : BaseViewModel<*>> : BaseActivity<V>() {
 
     lateinit var vm: VM
 

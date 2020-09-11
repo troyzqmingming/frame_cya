@@ -1,4 +1,4 @@
-package com.cya.frame.base.adapter
+package com.cya.frame.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter

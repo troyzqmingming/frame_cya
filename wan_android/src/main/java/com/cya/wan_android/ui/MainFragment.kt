@@ -54,4 +54,7 @@ class MainFragment : CyaBaseFragment<FragmentMainBinding>() {
     override fun initData() {
     }
 
+    override fun setObserve() {
+    }
+
 }

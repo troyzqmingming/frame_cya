@@ -5,24 +5,44 @@
     android:id="@+id/nav_main"
     app:startDestination="@id/flashFragment">
 
+
     <fragment
         android:id="@+id/flashFragment"
         android:name="com.cya.wan_android.ui.FlashFragment"
         android:label="fragment_flash"
-        tools:layout="@layout/fragment_flash" >
+        tools:layout="@layout/fragment_flash">
         <action
             android:id="@+id/action_flashFragment_to_mainFragment"
             app:destination="@id/mainFragment"
             app:enterAnim="@anim/anim_ui_enter"
             app:exitAnim="@anim/anim_ui_bg_exit"
             app:popEnterAnim="@anim/anim_ui_exit"
-            app:popExitAnim="@anim/anim_ui_bg_enter" />
+            app:popExitAnim="@anim/anim_ui_bg_enter"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.cya.wan_android.ui.MainFragment"
         android:label="MainFragment"
         tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.cya.wan_android.ui.login.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_personalFragment"
+            app:destination="@id/personalFragment"
+            app:popUpTo="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personalFragment"
+        android:name="com.cya.wan_android.ui.personal.PersonalFragment"
+        android:label="PersonalFragment"
+        tools:layout="@layout/fragment_personal" />
+    <action
+        android:id="@+id/action_global_loginFragment"
+        app:destination="@id/loginFragment" />
 
 
 </navigation>

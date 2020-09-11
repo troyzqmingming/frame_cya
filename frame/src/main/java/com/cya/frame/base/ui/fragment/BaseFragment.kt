@@ -1,4 +1,4 @@
-package com.cya.frame.base.ui
+package com.cya.frame.base.ui.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.cya.frame.base.ui.IView
+import com.cya.frame.base.ui.activity.BaseActivity
 
-abstract class BaseFragment<V : ViewBinding> : Fragment() {
+abstract class BaseFragment<V : ViewBinding> : Fragment(), IView<V> {
 
     lateinit var binding: V
 
@@ -26,9 +28,9 @@ abstract class BaseFragment<V : ViewBinding> : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setObserve()
         initView()
         initData()
-        startObserve()
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -38,11 +40,4 @@ abstract class BaseFragment<V : ViewBinding> : Fragment() {
         mActivity = context as BaseActivity<*>
     }
 
-    abstract fun getViewBinding(): V
-
-    open fun startObserve() {}
-
-    abstract fun initView()
-
-    abstract fun initData()
 }

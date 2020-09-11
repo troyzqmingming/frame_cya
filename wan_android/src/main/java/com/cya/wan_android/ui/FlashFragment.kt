@@ -1,12 +1,12 @@
 package com.cya.wan_android.ui
 
-import com.cya.frame.base.ui.BaseFragment
+import com.cya.wan_android.base.CyaBaseFragment
 import com.cya.wan_android.databinding.FragmentFlashBinding
 import com.cya.wan_android.ext.nav
 import java.util.*
 import kotlin.concurrent.timerTask
 
-class FlashFragment : BaseFragment<FragmentFlashBinding>() {
+class FlashFragment : CyaBaseFragment<FragmentFlashBinding>() {
 
     override fun getViewBinding(): FragmentFlashBinding {
         return FragmentFlashBinding.inflate(layoutInflater)
@@ -19,5 +19,8 @@ class FlashFragment : BaseFragment<FragmentFlashBinding>() {
         Timer().schedule(timerTask {
             nav(FlashFragmentDirections.actionFlashFragmentToMainFragment())
         }, 1000L)
+    }
+
+    override fun setObserve() {
     }
 }

@@ -50,6 +50,7 @@ dependencies {
     implementation rootProject.ext.dependencies["navigationUI"]
     implementation rootProject.ext.dependencies["koinViewModel"]
     implementation rootProject.ext.dependencies["smartRefreshLayout"]
+    implementation rootProject.ext.dependencies["paging"]
     implementation project(":frame")
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }

@@ -1,12 +1,13 @@
 package com.cya.wan_android.ui.main.home
 
 import androidx.lifecycle.MutableLiveData
-import com.cya.frame.base.vm.BaseViewModel
+import com.cya.frame.base.Results
 import com.cya.frame.ext.otherwise
 import com.cya.frame.ext.yes
-import com.cya.wan_android.bean.home.ArticleListResult
+import com.cya.wan_android.base.CyaBaseVM
+import com.cya.wan_android.entity.ArticleListResult
 
-class HomeVM(repo: HomeRepo) : BaseViewModel<HomeRepo>(repo) {
+class HomeVM(repo: HomeRepo) : CyaBaseVM<HomeRepo>(repo) {
 
     val articleListLiveData = MutableLiveData<ArticleListResult>()
 
@@ -21,11 +22,10 @@ class HomeVM(repo: HomeRepo) : BaseViewModel<HomeRepo>(repo) {
         }.otherwise {
             ++curArticlePage
         }
-        launch({
-            repository.requestArticleList(curArticlePage)
-        }, success = {
-            articleListLiveData.postValue(it)
-        })
-
+        viewModelLaunch {
+            checkResult(repository.requestArticleList(curArticlePage)) {
+                articleListLiveData.postValue(it)
+            }
+        }
     }
 }

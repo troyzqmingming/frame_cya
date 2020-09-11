@@ -40,8 +40,7 @@ class HomeFragment : CyaBaseVMFragment<FragmentHomeBinding, HomeVM>() {
         return getViewModel()
     }
 
-    override fun startObserve() {
-        super.startObserve()
+    override fun setObserve() {
         vm.apply {
             articleListLiveData.observe(this@HomeFragment) { articleResult ->
                 (curArticlePage == 0).yes {

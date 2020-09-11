@@ -48,6 +48,7 @@ ext {
             lifecycleLiveData            : "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0",
             //koin
             koinViewModel                : "org.koin:koin-android-viewmodel:2.1.5",
+            paging                       : "androidx.paging:paging-runtime:2.1.2",
 
             //网络框架
             retrofit                     : "com.squareup.retrofit2:retrofit:${dependenciesVersion.retrofitVersion}",

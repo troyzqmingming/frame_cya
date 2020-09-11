@@ -18,17 +18,17 @@ class MainActivity : CyaBaseActivity<ActivityMainBinding>() {
     }
 
     override fun onBackPressed() {
-        //获取hostFragment
         val mMainNavFragment: Fragment? =
             supportFragmentManager.findFragmentById(R.id.fragment_container)
-        //获取当前所在的fragment
         val fragment =
             mMainNavFragment?.childFragmentManager?.primaryNavigationFragment
-        //如果当前处于根fragment即HostFragment
         if (fragment is MainFragment) {
             finish()
         } else {
             super.onBackPressed()
         }
+    }
+
+    override fun setObserve() {
     }
 }

@@ -4,10 +4,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import com.chad.library.adapter.base.BaseViewHolder
-import com.cya.frame.base.adapter.BaseRecyclerAdapter
+import com.cya.frame.adapter.BaseRecyclerAdapter
 import com.cya.frame.ext.randomColor
 import com.cya.wan_android.R
-import com.cya.wan_android.bean.home.Article
+import com.cya.wan_android.entity.Article
 
 class ArticleListAdapter : BaseRecyclerAdapter<Article>(R.layout.adapter_home_article_list) {
     override fun getLayoutManager(): GridLayoutManager {
