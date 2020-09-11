@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/flashFragment">
+
+    <fragment
+        android:id="@+id/flashFragment"
+        android:name="com.cya.wan_android.ui.FlashFragment"
+        android:label="fragment_flash"
+        tools:layout="@layout/fragment_flash" >
+        <action
+            android:id="@+id/action_flashFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:enterAnim="@anim/anim_ui_enter"
+            app:exitAnim="@anim/anim_ui_bg_exit"
+            app:popEnterAnim="@anim/anim_ui_exit"
+            app:popExitAnim="@anim/anim_ui_bg_enter" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.cya.wan_android.ui.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main" />
+
+
+</navigation>
