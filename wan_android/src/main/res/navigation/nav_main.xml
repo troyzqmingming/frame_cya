@@ -17,8 +17,7 @@
             app:enterAnim="@anim/anim_ui_enter"
             app:exitAnim="@anim/anim_ui_bg_exit"
             app:popEnterAnim="@anim/anim_ui_exit"
-            app:popExitAnim="@anim/anim_ui_bg_enter"
-            app:popUpToInclusive="true" />
+            app:popExitAnim="@anim/anim_ui_bg_enter" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
@@ -32,8 +31,7 @@
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_personalFragment"
-            app:destination="@id/personalFragment"
-            app:popUpTo="@id/mainFragment" />
+            app:destination="@id/personalFragment" />
     </fragment>
     <fragment
         android:id="@+id/personalFragment"
@@ -42,7 +40,18 @@
         tools:layout="@layout/fragment_personal" />
     <action
         android:id="@+id/action_global_loginFragment"
-        app:destination="@id/loginFragment" />
+        app:destination="@id/loginFragment"
+        app:enterAnim="@anim/anim_ui_enter"
+        app:exitAnim="@anim/anim_ui_bg_exit"
+        app:popEnterAnim="@anim/anim_ui_bg_enter"
+        app:popExitAnim="@anim/anim_ui_exit" />
+    <action
+        android:id="@+id/action_global_personalFragment"
+        app:destination="@id/personalFragment"
+        app:enterAnim="@anim/anim_ui_enter"
+        app:exitAnim="@anim/anim_ui_bg_exit"
+        app:popEnterAnim="@anim/anim_ui_bg_enter"
+        app:popExitAnim="@anim/anim_ui_exit" />
 
 
 </navigation>

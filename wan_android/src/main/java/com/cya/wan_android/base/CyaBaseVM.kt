@@ -27,9 +27,14 @@ abstract class CyaBaseVM<R : BaseRepository>(repo: R) : BaseViewModel<R>(repo) {
                 // 剥离errorCode = 0 的成功
                 when (val dataRes = result.data.build()) {
                     is Results.Success -> successBlock(dataRes.data.data)
-                    is Results.Failure -> handlerError(dataRes.error)
+                    // 登录失败等
+                    is Results.Failure -> {
+                        errorLiveData.postValue(dataRes.error)
+                        handlerError(dataRes.error)
+                    }
                 }
             }
+            // 网络异常等
             is Results.Failure -> handlerError(result.error)
         }
     }
