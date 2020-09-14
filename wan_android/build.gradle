@@ -1,18 +1,24 @@
+plugins {
+    id "com.cya.plugin"
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
+import com.cya.plugin.*
+
 android {
-    compileSdkVersion rootProject.android.compileSdkVersion
-    buildToolsVersion rootProject.android.buildToolsVersion
+    compileSdkVersion BuildAndroid.CompileSdkVersion
+    buildToolsVersion BuildAndroid.BuildToolsVersion
 
     defaultConfig {
         applicationId "com.cya.wan_android"
-        minSdkVersion rootProject.android.minSdkVersion
-        targetSdkVersion rootProject.android.targetSdkVersion
-        versionCode rootProject.android.versionCode
-        versionName rootProject.android.versionName
+        minSdkVersion BuildAndroid.MinSdkVersion
+        targetSdkVersion BuildAndroid.TargetSdkVersion
+        versionCode BuildAndroid.VersionCode
+        versionName BuildAndroid.VersionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -41,16 +47,13 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation rootProject.ext.dependencies["appcompat"]
-    implementation rootProject.ext.dependencies["coreKtx"]
-    implementation rootProject.ext.dependencies["constraintlayout"]
-    implementation rootProject.ext.dependencies["viewPager2"]
-    implementation rootProject.ext.dependencies["navigationFragment"]
-    implementation rootProject.ext.dependencies["navigationUI"]
-    implementation rootProject.ext.dependencies["koinViewModel"]
-    implementation rootProject.ext.dependencies["smartRefreshLayout"]
-    implementation rootProject.ext.dependencies["paging"]
+    implementation Dependencies.KotlinLib
+    implementation Dependencies.Appcompat
+    implementation Dependencies.ConstraintLayout
+    implementation Dependencies.ViewPager2
+    implementation Dependencies.NavigationFragment
+    implementation Dependencies.NavigationUI
+    implementation Dependencies.KoinViewModel
+    implementation Dependencies.smartRefreshLayout
     implementation project(":frame")
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }

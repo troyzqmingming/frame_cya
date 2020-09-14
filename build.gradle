@@ -17,7 +17,7 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
-apply from: 'config.gradle'
+//apply from: 'config.gradle'
 
 allprojects {
     repositories {

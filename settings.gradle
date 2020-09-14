@@ -1,3 +1,4 @@
+includeBuild 'versionPlugin'
 include ':wan_android'//include ':feature_article'
 //include ':library_base'
 //include ':library_ui'

@@ -1,12 +1,17 @@
+plugins {
+    id "com.cya.plugin"
+}
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 //推荐放在module的gradle依赖文件的开头
 apply plugin: 'com.novoda.bintray-release'
 
+import com.cya.plugin.*
+
 android {
-    compileSdkVersion rootProject.android.compileSdkVersion
-    buildToolsVersion rootProject.android.buildToolsVersion
+    compileSdkVersion BuildAndroid.CompileSdkVersion
+    buildToolsVersion BuildAndroid.BuildToolsVersion
 
     lintOptions {
         abortOnError false
@@ -14,10 +19,10 @@ android {
 
 
     defaultConfig {
-        minSdkVersion rootProject.android.minSdkVersion
-        targetSdkVersion rootProject.android.targetSdkVersion
-        versionCode rootProject.android.versionCode
-        versionName rootProject.android.versionName
+        minSdkVersion BuildAndroid.MinSdkVersion
+        targetSdkVersion BuildAndroid.TargetSdkVersion
+        versionCode BuildAndroid.VersionCode
+        versionName BuildAndroid.VersionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -49,36 +54,37 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation rootProject.ext.dependencies["appcompat"]
-    implementation rootProject.ext.dependencies["coreKtx"]
-    implementation rootProject.ext.dependencies["constraintlayout"]
-    implementation rootProject.ext.dependencies["viewPager2"]
-    implementation rootProject.ext.dependencies["navigationFragment"]
-    implementation rootProject.ext.dependencies["navigationUI"]
-    implementation rootProject.ext.dependencies["navigationDynamic"]
+    implementation Dependencies.KotlinLib
+    implementation Dependencies.Appcompat
+    implementation Dependencies.CoreKtx
+    implementation Dependencies.ConstraintLayout
+    implementation Dependencies.ViewPager2
+    implementation Dependencies.NavigationFragment
+    implementation Dependencies.NavigationUI
+    implementation Dependencies.NavigationDynamic
     //协程
-    implementation rootProject.ext.dependencies["coroutines"]
-    implementation rootProject.ext.dependencies["coroutinesAndroid"]
+    implementation Dependencies.Coroutines
+    implementation Dependencies.CoroutinesAndroid
     //viewmodel
-    implementation rootProject.ext.dependencies["lifecycleViewModel"]
-    implementation rootProject.ext.dependencies["recyclerview"]
+    implementation Dependencies.LifecycleViewModel
+    implementation Dependencies.LifecycleLiveData
+    implementation Dependencies.Recyclerview
     //Glide
-    implementation rootProject.ext.dependencies["glide"]
-    annotationProcessor rootProject.ext.dependencies["glideCompiler"]
+    implementation Dependencies.Glide
+    annotationProcessor Dependencies.GlideCompiler
     //retrofit
-    api rootProject.ext.dependencies["retrofit"]
-    api rootProject.ext.dependencies["retrofitGson"]
-    api rootProject.ext.dependencies["okHttpLogging"]
-    api(rootProject.ext.dependencies["loggingInterceptor"]) {
+    api Dependencies.Retrofit
+    api Dependencies.RetrofitGson
+    api Dependencies.OkHttpLogging
+    api(Dependencies.LoggingInterceptor) {
         exclude group: 'org.json', module: 'json'
     }
     //livedatabus
-    api rootProject.ext.dependencies["liveBus"]
+    api Dependencies.LiveBus
     //recyclerAdapter
-    api rootProject.ext.dependencies["baseRecyclerViewAdapterHelper"]
+    api Dependencies.BaseRecyclerViewAdapterHelper
     //logger
-    api rootProject.ext.dependencies["logger"]
+    api Dependencies.Logger
 
 }
 
