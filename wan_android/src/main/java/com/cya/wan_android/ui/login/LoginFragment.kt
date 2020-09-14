@@ -27,6 +27,7 @@ class LoginFragment : CyaBaseVMFragment<FragmentLoginBinding, LoginVM>() {
         binding.tvRegister.clickNoRepeat {
             vm.register(binding.etPhone.text.toString(), binding.etPassword.text.toString())
         }
+        binding.toolbar.setNavigationOnClickListener { finish() }
     }
 
     override fun initData() {
