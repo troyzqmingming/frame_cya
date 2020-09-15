@@ -55,5 +55,7 @@ dependencies {
     implementation Dependencies.NavigationUI
     implementation Dependencies.KoinViewModel
     implementation Dependencies.smartRefreshLayout
+    implementation Dependencies.LifecycleLiveData
+    implementation Dependencies.LifecycleViewModel
     implementation project(":frame")
 }

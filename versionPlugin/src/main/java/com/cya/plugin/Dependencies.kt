@@ -50,6 +50,8 @@ object Dependencies {
         "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.JetPackLifecycleViewModel}"
     const val LifecycleLiveData =
         "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.JetPackLifecycleLiveData}"
+    const val LifeExtensions =
+        "androidx.lifecycle:lifecycle-extensions:${Versions.JetPackLifecycleLiveData}"
     const val Paging = "androidx.paging:paging-runtime:${Versions.JetPackPaging}"
     const val NavigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.JetPackNavigation}"
     const val NavigationUI = "androidx.navigation:navigation-ui-ktx:${Versions.JetPackNavigation}"

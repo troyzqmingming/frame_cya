@@ -2,7 +2,7 @@ package com.cya.wan_android.ui.main.mine
 
 import com.cya.frame.ext.*
 import com.cya.wan_android.NavMainDirections
-import com.cya.wan_android.base.CyaBaseFragment
+import com.cya.wan_android.R
 import com.cya.wan_android.base.CyaBaseVMFragment
 import com.cya.wan_android.contract.EventKey
 import com.cya.wan_android.databinding.FragmentMineBinding
@@ -27,16 +27,16 @@ class MineFragment : CyaBaseVMFragment<FragmentMineBinding, LoginVM>() {
                 nav(NavMainDirections.actionGlobalLoginFragment())
             }
         }
-        binding.ivLogout.clickNoRepeat {
-            vm.logout()
+        binding.toolbar.setOnMenuItemClickListener {
+            (it.itemId == R.id.menu_logout).yes {
+                vm.logout()
+            }
+            return@setOnMenuItemClickListener true
         }
     }
 
     override fun initData() {
-        isLogin.yes {
-            binding.tvUser.text = getUserCache()?.nickname
-            binding.ivLogout.visible()
-        }
+        setUser(getUserCache())
     }
 
     override fun setObserve() {
@@ -53,12 +53,11 @@ class MineFragment : CyaBaseVMFragment<FragmentMineBinding, LoginVM>() {
     }
 
     private fun setUser(userResult: UserResult? = null) {
+        binding.toolbar.menu.findItem(R.id.menu_logout).isVisible = isLogin
         isLogin.yes {
             binding.tvUser.text = userResult?.nickname
-            binding.ivLogout.visible()
         }.otherwise {
             binding.tvUser.text = "请登录"
-            binding.ivLogout.gone()
         }
     }
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<dimen name="dp_5">5.4800dp</dimen>
+	<dimen name="dp_10">10.9600dp</dimen>
+	<dimen name="dp_15">16.4400dp</dimen>
+	<dimen name="dp_20">21.9200dp</dimen>
+	<dimen name="dp_25">27.4000dp</dimen>
+	<dimen name="dp_30">32.8800dp</dimen>
+	<dimen name="dp_50">54.8000dp</dimen>
+	<dimen name="dp_75">82.2000dp</dimen>
+	<dimen name="dp_100">109.6000dp</dimen>
+	<dimen name="dp_200">219.2000dp</dimen>
+	<dimen name="dp_button">109.6000dp</dimen>
+	<dimen name="sp_12">13.1520sp</dimen>
+	<dimen name="sp_14">15.3440sp</dimen>
+	<dimen name="sp_16">17.5360sp</dimen>
+	<dimen name="sp_22">24.1120sp</dimen>
+	<dimen name="sp_40">43.8400sp</dimen>
+</resources>
