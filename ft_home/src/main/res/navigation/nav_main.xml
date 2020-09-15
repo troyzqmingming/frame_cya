@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/flashFragment">
+
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.cya.application.ft_home.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/flashFragment"
+        tools:layout="@layout/fragment_flash"
+        android:name="com.cya.application.ft_home.FlashFragment"
+        android:label="FlashFragment" >
+        <action
+            android:id="@+id/action_flashFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        tools:layout="@layout/adapter_home_article_list"
+        android:name="com.cya.application.ft_home.main.home.HomeFragment"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/mineFragment"
+        tools:layout="@layout/fragment_mine"
+        android:name="com.cya.application.ft_home.main.mine.MineFragment"
+        android:label="MineFragment" />
+
+
+</navigation>

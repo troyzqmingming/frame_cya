@@ -25,6 +25,8 @@ object Versions {
     const val JetPackLifecycleLiveData = "2.2.0"
     const val JetPackPaging = "2.1.2"
     const val Glide = "4.11.0"
+    const val Arouter = "1.5.0"
+    const val ArouterCompiler = "1.2.2"
 }
 
 object Dependencies {
@@ -70,4 +72,6 @@ object Dependencies {
     const val GlideCompiler =
         "com.github.bumptech.glide:compiler:${Versions.Glide}"
     const val smartRefreshLayout = "com.scwang.smartrefresh:SmartRefreshLayout:1.1.2"
+    const val Arouter ="com.alibaba:arouter-api:${Versions.Arouter}"
+    const val ArouterCompiler ="com.alibaba:arouter-compiler:${Versions.ArouterCompiler}"
 }

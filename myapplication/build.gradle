@@ -1,0 +1,64 @@
+plugins {
+    id "com.cya.plugin"
+}
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+import com.cya.plugin.*
+
+android {
+    compileSdkVersion BuildAndroid.CompileSdkVersion
+    buildToolsVersion BuildAndroid.BuildToolsVersion
+
+    defaultConfig {
+        applicationId "com.cya.myapplication"
+        minSdkVersion BuildAndroid.MinSdkVersion
+        targetSdkVersion BuildAndroid.TargetSdkVersion
+        versionCode BuildAndroid.VersionCode
+        versionName BuildAndroid.VersionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation Dependencies.Annotation
+    implementation Dependencies.KotlinLib
+    implementation Dependencies.CoreKtx
+    implementation Dependencies.Appcompat
+    implementation Dependencies.KoinViewModel
+    implementation Dependencies.NavigationUI
+    implementation Dependencies.NavigationFragment
+    implementation Dependencies.LifecycleViewModel
+    implementation Dependencies.LifecycleLiveData
+    implementation Dependencies.ViewPager2
+    implementation Dependencies.smartRefreshLayout
+    implementation Dependencies.Recyclerview
+    implementation Dependencies.ConstraintLayout
+    implementation Dependencies.Arouter
+    kapt Dependencies.ArouterCompiler
+    implementation project(":lib_base")
+    implementation project(":lib_ui")
+    implementation project(":ft_home")
+    implementation project(":ft_user")
+}

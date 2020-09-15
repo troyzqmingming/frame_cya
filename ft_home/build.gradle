@@ -1,0 +1,58 @@
+plugins {
+    id "com.cya.plugin"
+}
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+import com.cya.plugin.*
+
+android {
+    compileSdkVersion BuildAndroid.CompileSdkVersion
+    buildToolsVersion BuildAndroid.BuildToolsVersion
+
+    defaultConfig {
+        minSdkVersion BuildAndroid.MinSdkVersion
+        targetSdkVersion BuildAndroid.TargetSdkVersion
+        versionCode BuildAndroid.VersionCode
+        versionName BuildAndroid.VersionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    viewBinding {
+        enabled = true
+    }
+}
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation Dependencies.Annotation
+    compileOnly(Dependencies.KotlinLib)
+    compileOnly(Dependencies.CoreKtx)
+    compileOnly(Dependencies.Appcompat)
+    compileOnly(Dependencies.ViewPager2)
+    compileOnly(Dependencies.smartRefreshLayout)
+    compileOnly(Dependencies.Recyclerview)
+    compileOnly(Dependencies.ConstraintLayout)
+    compileOnly(Dependencies.NavigationUI)
+    compileOnly(Dependencies.NavigationFragment)
+    compileOnly(Dependencies.KoinViewModel)
+    compileOnly(Dependencies.Arouter)
+    kapt Dependencies.ArouterCompiler
+    compileOnly project(":lib_base")
+    compileOnly project(":lib_ui")
+
+}

@@ -7,7 +7,7 @@ import com.cya.frame.base.ui.IView
 
 abstract class BaseActivity<V : ViewBinding> : AppCompatActivity(), IView<V> {
 
-    private lateinit var binding: V
+    lateinit var binding: V
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

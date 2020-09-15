@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.cya.ft_user">
+
+    <application>
+        <activity
+            android:name=".login.LoginActivity"
+            android:launchMode="singleInstance" />
+        <activity
+            android:name=".personal.PersonalActivity"
+            android:launchMode="singleInstance" />
+    </application>
+
+</manifest>
