@@ -6,7 +6,7 @@ import com.cya.lib_base.base.CyaBaseActivity
 import com.cya.lib_base.contract.ConstantsPath
 import com.cya.lib_base.service.user.wrap.LoginServiceImplWrap
 
-@Route(path = ConstantsPath.USER_PERSONAL)
+@Route(path = ConstantsPath.UI.PERSONAL)
 class PersonalActivity : CyaBaseActivity<ActivityPersonalBinding>() {
     override fun getViewBinding(): ActivityPersonalBinding {
         return ActivityPersonalBinding.inflate(layoutInflater)

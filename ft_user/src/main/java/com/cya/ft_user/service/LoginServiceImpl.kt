@@ -7,14 +7,15 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.cya.ft_user.login.LoginActivity
 import com.cya.lib_base.contract.ConstantsPath
 import com.cya.lib_base.entity.UserResult
+import com.cya.lib_base.ext.router
 import com.cya.lib_base.service.user.LoginService
 
 /**
- * 实现服务接口
+ * 依赖注入
  *
  * [com.cya.lib_base.service.user.wrap.LoginServiceImplWrap]
  */
-@Route(path = ConstantsPath.USER_LOGIN_PATH)
+@Route(path = ConstantsPath.Service.LOGIN)
 class LoginServiceImpl : LoginService {
 
     override fun isLogin(): Boolean {
@@ -30,7 +31,7 @@ class LoginServiceImpl : LoginService {
     }
 
     override fun login(context: Context) {
-        context.startActivity(Intent(context, LoginActivity::class.java))
+        router(ConstantsPath.UI.LOGIN)
     }
 
 

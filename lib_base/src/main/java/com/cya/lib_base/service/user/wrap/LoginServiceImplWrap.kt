@@ -9,12 +9,13 @@ import com.cya.lib_base.entity.UserResult
 import com.cya.lib_base.service.user.LoginService
 
 /**
- * 发现服务
+ * 服务，
  * 统一调度
+ * 提供多module调用
  */
 object LoginServiceImplWrap {
 
-    @Autowired(name = ConstantsPath.USER_LOGIN_PATH)
+    @Autowired(name = ConstantsPath.Service.LOGIN)
     lateinit var service: LoginService
 
     init {

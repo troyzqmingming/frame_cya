@@ -10,6 +10,9 @@ import com.cya.lib_base.base.CyaBaseFragment
 import com.cya.lib_base.contract.ConstantsPath
 import com.cya.lib_base.contract.EventKey
 import com.cya.lib_base.entity.UserResult
+import com.cya.lib_base.ext.router
+import com.cya.lib_base.ext.routerIntercept
+import com.cya.lib_base.router.LoginNavigationCallbackImpl
 import com.cya.lib_base.service.user.wrap.LoginServiceImplWrap
 import com.jeremyliao.liveeventbus.LiveEventBus
 
@@ -20,12 +23,13 @@ class MineFragment : CyaBaseFragment<FragmentMineBinding>() {
 
     override fun initView() {
         binding.tvUser.clickNoRepeat {
-            LoginServiceImplWrap.isLogin().yes {
-                ARouter.getInstance().build(ConstantsPath.USER_PERSONAL).navigation()
-            }.otherwise {
-                LoginServiceImplWrap.login(mActivity)
-            }
-
+//            LoginServiceImplWrap.isLogin().yes {
+//                router(ConstantsPath.UI.PERSONAL)
+//            }.otherwise {
+//                LoginServiceImplWrap.login(mActivity)
+//            }
+            //
+            routerIntercept(ConstantsPath.UI.PERSONAL)
 
         }
         binding.toolbar.setOnMenuItemClickListener {
