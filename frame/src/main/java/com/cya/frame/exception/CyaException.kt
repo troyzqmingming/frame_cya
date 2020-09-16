@@ -21,7 +21,11 @@ enum class Error(val value: String) {
     /**
      * 连接超时
      */
-    SOCKET_TIMEOUT("连接超时")
+    SOCKET_TIMEOUT("连接超时"),
+    /**
+     * 取消
+     */
+    CANCEL("取消")
 }
 
 /**

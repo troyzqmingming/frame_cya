@@ -23,7 +23,7 @@ object Versions {
     const val JetPackNavigation = "2.3.0"
     const val JetPackLifecycleViewModel = "2.2.0"
     const val JetPackLifecycleLiveData = "2.2.0"
-    const val JetPackPaging = "2.1.2"
+    const val JetPackPaging = "3.0.0-alpha05"
     const val Glide = "4.11.0"
     const val Arouter = "1.5.0"
     const val ArouterCompiler = "1.2.2"

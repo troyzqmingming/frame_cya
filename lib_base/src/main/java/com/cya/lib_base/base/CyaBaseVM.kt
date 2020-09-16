@@ -4,6 +4,8 @@ import com.cya.frame.base.Results
 import com.cya.frame.base.vm.BaseRepository
 import com.cya.frame.base.vm.BaseViewModel
 import com.cya.frame.exception.CyaException
+import com.cya.frame.exception.Error
+import com.cya.frame.ext.no
 import com.cya.frame.ext.otherwise
 import com.cya.frame.ext.toast
 import com.cya.frame.ext.yes
@@ -42,6 +44,8 @@ abstract class CyaBaseVM<R : BaseRepository>(repo: R) : BaseViewModel<R>(repo) {
 
     override fun handlerError(e: CyaException) {
         super.handlerError(e)
-        toast(e.errorMsg)
+        (e.errorCode == Error.CANCEL.ordinal).no {
+            toast(e.errorMsg)
+        }
     }
 }

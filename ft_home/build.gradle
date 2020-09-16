@@ -52,6 +52,7 @@ dependencies {
     compileOnly(Dependencies.KoinViewModel)
     compileOnly(Dependencies.Arouter)
     kapt Dependencies.ArouterCompiler
+    compileOnly(Dependencies.Paging)
     compileOnly project(":lib_base")
     compileOnly project(":lib_ui")
 

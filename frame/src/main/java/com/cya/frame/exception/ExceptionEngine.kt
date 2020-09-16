@@ -2,6 +2,7 @@ package com.cya.frame.exception
 
 import android.net.ParseException
 import com.google.gson.JsonParseException
+import kotlinx.coroutines.CancellationException
 import org.json.JSONException
 import retrofit2.HttpException
 import java.net.ConnectException
@@ -26,6 +27,9 @@ object ExceptionEngine {
             is ConnectException, is UnknownHostException -> {
                 //均视为链接异常
                 CyaException(Error.NETWORK_ERROR.ordinal, Error.NETWORK_ERROR.value)
+            }
+            is CancellationException -> {
+                CyaException(Error.CANCEL.ordinal, Error.CANCEL.value)
             }
             is CyaException -> {
                 t
