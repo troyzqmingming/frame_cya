@@ -23,9 +23,9 @@ class HomeVM(repo: HomeRepo) : CyaBaseVM<HomeRepo>(repo) {
             ++curArticlePage
         }
         viewModelLaunch {
-            checkResult(repository.requestArticleList(curArticlePage)) {
+            checkResult(repository.requestArticleList(curArticlePage), {
                 articleListLiveData.postValue(it)
-            }
+            })
         }
     }
 }

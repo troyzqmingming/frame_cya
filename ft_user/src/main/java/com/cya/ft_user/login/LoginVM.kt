@@ -21,25 +21,25 @@ class LoginVM(repo: LoginRepo) : CyaBaseVM<LoginRepo>(repo) {
 
     fun register(username: String, password: String) {
         viewModelLaunch {
-            checkResult(repository.requestRegisterWanAndroid(username, password)) { uInfo ->
+            checkResult(repository.requestRegisterWanAndroid(username, password), { uInfo ->
                 uInfo?.let { it1 ->
                     saveUserCache(it1)
                     LiveEventBus.get(EventKey.UPDATE_INFO, UserResult::class.java).post(it1)
                 }
                 userLiveData.postValue(uInfo)
-            }
+            })
         }
     }
 
     fun login(username: String, password: String) {
         viewModelLaunch {
-            checkResult(repository.requestLoginWanAndroid(username, password)) { uInfo ->
+            checkResult(repository.requestLoginWanAndroid(username, password), { uInfo ->
                 uInfo?.let { it1 ->
                     saveUserCache(it1)
                     LiveEventBus.get(EventKey.UPDATE_INFO, UserResult::class.java).post(it1)
                 }
                 userLiveData.postValue(uInfo)
-            }
+            })
         }
     }
 }
