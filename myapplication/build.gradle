@@ -57,6 +57,7 @@ dependencies {
     implementation Dependencies.ConstraintLayout
     implementation Dependencies.Arouter
     kapt Dependencies.ArouterCompiler
+    implementation Dependencies.Paging
     implementation project(":lib_base")
     implementation project(":lib_ui")
     implementation project(":ft_home")

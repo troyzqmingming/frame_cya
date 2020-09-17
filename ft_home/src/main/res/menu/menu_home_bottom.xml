@@ -5,6 +5,11 @@
         android:id="@+id/menu_main_home"
         android:icon="@drawable/ic_home_black_24dp"
         android:title="Home" />
+
+    <item
+        android:id="@+id/menu_main_dynamic"
+        android:icon="@drawable/ic_dynamic_black_24dp"
+        android:title="Dynamic" />
     <item
         android:id="@+id/menu_main_mine"
         android:icon="@drawable/ic_mine_black_24dp"

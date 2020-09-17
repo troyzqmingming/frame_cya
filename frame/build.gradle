@@ -72,6 +72,7 @@ dependencies {
     //Glide
     implementation Dependencies.Glide
     annotationProcessor Dependencies.GlideCompiler
+    implementation Dependencies.Paging
     //retrofit
     api Dependencies.Retrofit
     api Dependencies.RetrofitGson
