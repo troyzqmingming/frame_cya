@@ -1,6 +1,6 @@
 package com.cya.application.ft_home.main.dynamic
 
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.*
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cya.application.ft_home.databinding.FragmentDynamicBinding
@@ -9,11 +9,30 @@ import com.cya.application.ft_home.main.dynamic.entity.DynamicItem
 import com.cya.frame.base.ICallback
 import com.cya.frame.ext.toast
 import com.cya.lib_base.base.CyaBaseVMFragment
+import com.cya.lib_base.ext.router
 import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.fragment_dynamic.*
 import org.koin.android.viewmodel.ext.android.getViewModel
 
 class DynamicFragment : CyaBaseVMFragment<FragmentDynamicBinding, DynamicVM>() {
+
+    class MyLocation(lifecycle: Lifecycle) : LifecycleObserver {
+
+        init {
+            lifecycle.addObserver(this)
+        }
+
+        @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+        fun resume() {
+            Logger.e("lifecycle ON_RESUME")
+        }
+
+        @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+        fun pause() {
+            Logger.e("lifecycle ON_PAUSE")
+        }
+
+    }
 
     private val dynamicAdapter by lazy {
         DynamicPagingAdapter()
@@ -34,6 +53,7 @@ class DynamicFragment : CyaBaseVMFragment<FragmentDynamicBinding, DynamicVM>() {
     }
 
     override fun initView() {
+        MyLocation(lifecycle)
         recyclerView.apply {
             layoutManager = LinearLayoutManager(mActivity)
             adapter = dynamicAdapter
@@ -58,6 +78,7 @@ class DynamicFragment : CyaBaseVMFragment<FragmentDynamicBinding, DynamicVM>() {
             onItemClickListener = object : ICallback<DynamicItem> {
                 override fun invoke(t: DynamicItem) {
                     toast(t.title)
+                    notifyItemRemoved(0)
                 }
 
             }
