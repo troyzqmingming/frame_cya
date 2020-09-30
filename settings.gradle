@@ -1,3 +1,4 @@
+include ':test'
 include ':ft_user'
 include ':lib_ui'
 include ':myapplication'

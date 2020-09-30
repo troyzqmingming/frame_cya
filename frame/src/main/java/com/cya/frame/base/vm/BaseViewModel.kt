@@ -3,7 +3,14 @@ package com.cya.frame.base.vm
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cya.frame.base.Failed
 import com.cya.frame.exception.CyaException
+import com.cya.frame.exception.ExceptionEngine
+import com.cya.frame.ext.otherwise
+import com.cya.frame.ext.yes
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 abstract class BaseViewModel<R : BaseRepository>(
@@ -11,6 +18,7 @@ abstract class BaseViewModel<R : BaseRepository>(
 ) :
     ViewModel() {
 
+    @Deprecated("使用launch 已实现flow")
     open fun <T> viewModelLaunch(block: suspend () -> T) {
         viewModelScope.launch {
             showLoading()
@@ -19,15 +27,47 @@ abstract class BaseViewModel<R : BaseRepository>(
         }
     }
 
-    open fun handlerError(e: CyaException) {
-        errorLiveData.postValue(e)
-        hideLoading()
+    open fun <T> launch(
+        block: suspend () -> T,
+        result: (T) -> Unit,
+        error: ((CyaException) -> Unit)? = null
+    ) {
+        viewModelScope.launch(Dispatchers.Main) {
+            showLoading()
+            flow {
+                emit(block())
+            }
+                .flowOn(Dispatchers.IO)
+                .catch { t: Throwable ->
+                    hideLoading()
+                    ExceptionEngine.handleException(t)
+                        .apply {
+                            (error == null).yes {
+                                errorLiveData.postValue(this)
+                            }.otherwise {
+                                error?.invoke(this)
+                            }
+                        }
+                }
+                .collect {
+                    hideLoading()
+                    result(it)
+                }
+
+
+        }
+
     }
 
     /**
      * 错误信息
      */
     val errorLiveData = MutableLiveData<CyaException>()
+
+    /**
+     * 失败信息
+     */
+    val failedLiveData = MutableLiveData<Failed>()
 
     /**
      * 无更多数据

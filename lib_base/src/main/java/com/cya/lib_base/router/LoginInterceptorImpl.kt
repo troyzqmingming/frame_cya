@@ -27,7 +27,9 @@ class LoginInterceptorImpl : IInterceptor {
             callback.onContinue(postcard)
         }.otherwise {
             when (postcard.path) {
+                // 不需要拦截
                 ConstantsPath.UI.LOGIN -> callback.onContinue(postcard)
+                // 拦截
                 else -> callback.onInterrupt(null)
             }
         }

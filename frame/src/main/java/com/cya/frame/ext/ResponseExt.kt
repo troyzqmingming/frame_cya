@@ -10,6 +10,7 @@ import com.cya.frame.exception.ExceptionEngine
  * @Author:         CYA
  * @CreateDate:     2020/9/11 4:14 PM
  */
+@Deprecated("使用launch 已实现flow")
 inline fun <T> progressApiResponse(request: () -> T): Results<T> {
     return try {
         Results.success(request())

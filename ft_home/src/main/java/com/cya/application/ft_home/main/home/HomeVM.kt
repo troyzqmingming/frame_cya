@@ -1,7 +1,6 @@
 package com.cya.application.ft_home.main.home
 
 import androidx.lifecycle.MutableLiveData
-import com.cya.frame.base.Results
 import com.cya.frame.ext.otherwise
 import com.cya.frame.ext.yes
 import com.cya.lib_base.base.CyaBaseVM
@@ -22,10 +21,10 @@ class HomeVM(repo: HomeRepo) : CyaBaseVM<HomeRepo>(repo) {
         }.otherwise {
             ++curArticlePage
         }
-        viewModelLaunch {
-            checkResult(repository.requestArticleList(curArticlePage), {
-                articleListLiveData.postValue(it)
-            })
-        }
+        launch({ repository.requestArticleList(curArticlePage) }, {
+            handlerResult(it) { list ->
+                articleListLiveData.postValue(list)
+            }
+        })
     }
 }

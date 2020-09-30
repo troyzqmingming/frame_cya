@@ -6,6 +6,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.cya.frame.base.vm.HIDE
 import com.cya.frame.base.vm.SHOW
 import com.cya.frame.ext.clickNoRepeat
+import com.cya.frame.ext.toast
 import com.cya.ft_user.databinding.ActivityLoginBinding
 import com.cya.lib_base.base.CyaBaseVMActivity
 import com.cya.lib_base.contract.ConstantsPath
@@ -56,6 +57,12 @@ class LoginActivity : CyaBaseVMActivity<ActivityLoginBinding, LoginVM>() {
                     is SHOW -> ProgressUtil.show(this@LoginActivity, "登录中", false)
                     is HIDE -> ProgressUtil.dismiss(this@LoginActivity)
                 }
+            }
+            failedLiveData.observe(this@LoginActivity) {
+                toast(it.msg)
+            }
+            errorLiveData.observe(this@LoginActivity) {
+                toast("code:${it.errorCode},msg:${it.errorMsg}")
             }
         }
     }

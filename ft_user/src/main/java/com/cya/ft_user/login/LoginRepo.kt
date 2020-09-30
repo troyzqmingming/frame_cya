@@ -1,8 +1,9 @@
 package com.cya.ft_user.login
 
 import com.cya.frame.base.vm.BaseRepository
-import com.cya.frame.ext.progressApiResponse
 import com.cya.ft_user.api.UserAPI
+import com.cya.lib_base.entity.HttpBaseResponse
+import com.cya.lib_base.entity.UserResult
 
 class LoginRepo(private val api: UserAPI) : BaseRepository() {
 
@@ -14,23 +15,23 @@ class LoginRepo(private val api: UserAPI) : BaseRepository() {
     suspend fun requestRegisterWanAndroid(
         username: String,
         password: String
-    ) = progressApiResponse {
+    ): HttpBaseResponse<UserResult> {
         val mutableMap = mutableMapOf<String, Any?>().apply {
             put("username", username)
             put("password", password)
             put("repassword", password)
         }
-        api.registerWanAndroid(mutableMap)
+        return api.registerWanAndroid(mutableMap)
     }
 
     suspend fun requestLoginWanAndroid(
         username: String,
         password: String
-    ) = progressApiResponse {
+    ): HttpBaseResponse<UserResult> {
         val mutableMap = mutableMapOf<String, Any?>().apply {
             put("username", username)
             put("password", password)
         }
-        api.loginWanAndroid(mutableMap)
+        return api.loginWanAndroid(mutableMap)
     }
 }

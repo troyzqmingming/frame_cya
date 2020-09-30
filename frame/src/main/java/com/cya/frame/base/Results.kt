@@ -9,6 +9,7 @@ import com.cya.frame.exception.CyaException
   * @Author:         CYA
   * @CreateDate:     2020/9/11 4:13 PM
  */
+@Deprecated("使用flow")
 sealed class Results<out T> {
 
     data class Success<out T>(val data: T) : Results<T>()
