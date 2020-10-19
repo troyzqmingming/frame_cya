@@ -34,28 +34,28 @@ class MineFragment : CyaBaseFragment<FragmentMineBinding>() {
             routerIntercept(ConstantsPath.UI.PERSONAL)
 
         }
-        binding.fabPlay.clickNoRepeat {
-            routerIntercept(ConstantsPath.UI.PLAY)
-        }
-        binding.wifi.clickNoRepeat {
-            binding.wifi.addAnimatorListener(object : Animator.AnimatorListener {
-                override fun onAnimationStart(animation: Animator?) {
-                    Logger.e("播放开始")
-                }
-
-                override fun onAnimationEnd(animation: Animator?) {
-                    Logger.e("播放结束")
-                }
-
-                override fun onAnimationCancel(animation: Animator?) {
-                }
-
-                override fun onAnimationRepeat(animation: Animator?) {
-                }
-
-            })
-            binding.wifi.playAnimation()
-        }
+//        binding.fabPlay.clickNoRepeat {
+//            routerIntercept(ConstantsPath.UI.PLAY)
+//        }
+//        binding.wifi.clickNoRepeat {
+//            binding.wifi.addAnimatorListener(object : Animator.AnimatorListener {
+//                override fun onAnimationStart(animation: Animator?) {
+//                    Logger.e("播放开始")
+//                }
+//
+//                override fun onAnimationEnd(animation: Animator?) {
+//                    Logger.e("播放结束")
+//                }
+//
+//                override fun onAnimationCancel(animation: Animator?) {
+//                }
+//
+//                override fun onAnimationRepeat(animation: Animator?) {
+//                }
+//
+//            })
+//            binding.wifi.playAnimation()
+//        }
         binding.toolbar.setOnMenuItemClickListener {
             (it.itemId == R.id.menu_logout).yes {
                 LoginServiceImplWrap.clearUserCache()
