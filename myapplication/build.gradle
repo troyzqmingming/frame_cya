@@ -58,6 +58,9 @@ dependencies {
     implementation Dependencies.Arouter
     kapt Dependencies.ArouterCompiler
     implementation Dependencies.Paging
+    implementation Dependencies.Coil
+    implementation Dependencies.CoilGif
+    implementation Dependencies.Lottie
     implementation project(":lib_base")
     implementation project(":lib_ui")
     implementation project(":ft_home")

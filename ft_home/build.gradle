@@ -51,8 +51,11 @@ dependencies {
     compileOnly(Dependencies.NavigationFragment)
     compileOnly(Dependencies.KoinViewModel)
     compileOnly(Dependencies.Arouter)
+    compileOnly(Dependencies.Coil)
+    compileOnly(Dependencies.CoilGif)
     kapt Dependencies.ArouterCompiler
     compileOnly(Dependencies.Paging)
+    compileOnly(Dependencies.Lottie)
     compileOnly project(":lib_base")
     compileOnly project(":lib_ui")
 

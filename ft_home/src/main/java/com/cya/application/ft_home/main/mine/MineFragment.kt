@@ -1,5 +1,6 @@
 package com.cya.application.ft_home.main.mine
 
+import android.animation.Animator
 import com.alibaba.android.arouter.launcher.ARouter
 import com.cya.application.ft_home.R
 import com.cya.application.ft_home.databinding.FragmentMineBinding
@@ -15,6 +16,7 @@ import com.cya.lib_base.ext.routerIntercept
 import com.cya.lib_base.router.LoginNavigationCallbackImpl
 import com.cya.lib_base.service.user.wrap.LoginServiceImplWrap
 import com.jeremyliao.liveeventbus.LiveEventBus
+import com.orhanobut.logger.Logger
 
 class MineFragment : CyaBaseFragment<FragmentMineBinding>() {
     override fun getViewBinding(): FragmentMineBinding {
@@ -31,6 +33,28 @@ class MineFragment : CyaBaseFragment<FragmentMineBinding>() {
             //
             routerIntercept(ConstantsPath.UI.PERSONAL)
 
+        }
+        binding.fabPlay.clickNoRepeat {
+            routerIntercept(ConstantsPath.UI.PLAY)
+        }
+        binding.wifi.clickNoRepeat {
+            binding.wifi.addAnimatorListener(object : Animator.AnimatorListener {
+                override fun onAnimationStart(animation: Animator?) {
+                    Logger.e("播放开始")
+                }
+
+                override fun onAnimationEnd(animation: Animator?) {
+                    Logger.e("播放结束")
+                }
+
+                override fun onAnimationCancel(animation: Animator?) {
+                }
+
+                override fun onAnimationRepeat(animation: Animator?) {
+                }
+
+            })
+            binding.wifi.playAnimation()
         }
         binding.toolbar.setOnMenuItemClickListener {
             (it.itemId == R.id.menu_logout).yes {

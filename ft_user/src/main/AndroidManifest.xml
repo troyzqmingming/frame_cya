@@ -9,6 +9,9 @@
         <activity
             android:name=".personal.PersonalActivity"
             android:launchMode="singleInstance" />
+        <activity
+            android:name=".play.PlayActivity"
+            android:launchMode="singleInstance" />
     </application>
 
 </manifest>

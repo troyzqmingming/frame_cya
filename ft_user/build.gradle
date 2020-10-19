@@ -55,6 +55,7 @@ dependencies {
     compileOnly(Dependencies.LifecycleLiveData)
     compileOnly(Dependencies.Arouter)
     kapt Dependencies.ArouterCompiler
+    compileOnly(Dependencies.Coil)
     compileOnly project(":lib_base")
     compileOnly project(":lib_ui")
 }

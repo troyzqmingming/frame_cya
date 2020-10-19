@@ -11,7 +11,7 @@ object BuildAndroid {
 }
 
 object Versions {
-    const val Kotlin = "1.4.0"
+    const val Kotlin = "1.4.10"
     const val Appcompat = "1.2.0"
     const val Annotation = "1.1.0"
     const val CoreKtx = "1.3.1"
@@ -27,6 +27,8 @@ object Versions {
     const val Glide = "4.11.0"
     const val Arouter = "1.5.0"
     const val ArouterCompiler = "1.2.2"
+    const val Coil = "1.0.0-rc3"
+    const val Lottie = "3.4.4"
 }
 
 object Dependencies {
@@ -74,4 +76,7 @@ object Dependencies {
     const val smartRefreshLayout = "com.scwang.smartrefresh:SmartRefreshLayout:1.1.2"
     const val Arouter ="com.alibaba:arouter-api:${Versions.Arouter}"
     const val ArouterCompiler ="com.alibaba:arouter-compiler:${Versions.ArouterCompiler}"
+    const val Coil = "io.coil-kt:coil:${Versions.Coil}"
+    const val CoilGif = "io.coil-kt:coil-gif:${Versions.Coil}"
+    const val Lottie = "com.airbnb.android:lottie:${Versions.Lottie}"
 }
