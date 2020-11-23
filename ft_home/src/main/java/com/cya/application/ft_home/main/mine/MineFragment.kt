@@ -1,20 +1,26 @@
 package com.cya.application.ft_home.main.mine
 
 import android.animation.Animator
+import android.content.res.Configuration
+import android.os.Bundle
 import com.alibaba.android.arouter.launcher.ARouter
 import com.cya.application.ft_home.R
 import com.cya.application.ft_home.databinding.FragmentMineBinding
+import com.cya.application.ft_home.view.ImmersionObserver
 import com.cya.frame.ext.clickNoRepeat
 import com.cya.frame.ext.otherwise
 import com.cya.frame.ext.yes
 import com.cya.lib_base.base.CyaBaseFragment
 import com.cya.lib_base.contract.ConstantsPath
-import com.cya.lib_base.contract.EventKey
+import com.cya.lib_base.contract.LOGOUT
+import com.cya.lib_base.contract.UPDATE_INFO
 import com.cya.lib_base.entity.UserResult
 import com.cya.lib_base.ext.router
 import com.cya.lib_base.ext.routerIntercept
 import com.cya.lib_base.router.LoginNavigationCallbackImpl
 import com.cya.lib_base.service.user.wrap.LoginServiceImplWrap
+import com.gyf.immersionbar.components.SimpleImmersionOwner
+import com.gyf.immersionbar.ktx.immersionBar
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.orhanobut.logger.Logger
 
@@ -70,10 +76,10 @@ class MineFragment : CyaBaseFragment<FragmentMineBinding>() {
     }
 
     override fun setObserve() {
-        LiveEventBus.get(EventKey.UPDATE_INFO, UserResult::class.java).observe(this) {
+        LiveEventBus.get(UPDATE_INFO, UserResult::class.java).observe(this) {
             setUser(it)
         }
-        LiveEventBus.get(EventKey.LOGOUT).observe(this) {
+        LiveEventBus.get(LOGOUT).observe(this) {
             setUser()
         }
     }

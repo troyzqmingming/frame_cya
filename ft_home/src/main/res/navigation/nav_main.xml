@@ -13,23 +13,25 @@
         tools:layout="@layout/fragment_main" />
     <fragment
         android:id="@+id/flashFragment"
-        tools:layout="@layout/fragment_flash"
         android:name="com.cya.application.ft_home.FlashFragment"
-        android:label="FlashFragment" >
+        android:label="FlashFragment"
+        tools:layout="@layout/fragment_flash">
         <action
             android:id="@+id/action_flashFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/mainFragment"
+            app:enterAnim="@anim/anim_ui_enter"
+            app:exitAnim="@anim/anim_ui_bg_exit" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        tools:layout="@layout/adapter_home_article_list"
         android:name="com.cya.application.ft_home.main.home.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment"
+        tools:layout="@layout/adapter_home_article_list" />
     <fragment
         android:id="@+id/mineFragment"
-        tools:layout="@layout/fragment_mine"
         android:name="com.cya.application.ft_home.main.mine.MineFragment"
-        android:label="MineFragment" />
+        android:label="MineFragment"
+        tools:layout="@layout/fragment_mine" />
 
 
 </navigation>
